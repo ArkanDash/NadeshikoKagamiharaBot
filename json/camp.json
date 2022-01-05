@@ -1,0 +1,18 @@
+{
+    "yourCamp":0,
+    "allCamp":[
+        "Danau Motosu",
+        "Perkemahan Kōan",
+        "Perkemahan Fumotoppara",
+        "Dataran Tinggi Takabocchi",
+        "Jukaino Bokujou",
+        "Gunung Fuji"        
+    ],
+    "campCost":[
+        2500,
+        10000,
+        30000,
+        75000,
+        125000
+    ]
+}
