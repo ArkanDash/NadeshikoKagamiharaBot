@@ -1,5 +1,6 @@
 import { MessageEmbed } from 'discord.js'
 import userProfile from "../../schema/profile-scheme.js"
+import ms from "parse-ms"
 
 const command = {
     name:"camp-game",
@@ -28,6 +29,7 @@ const command = {
                         break;
                     }
                 }
+                embed.setTitle("Pindah Perkemahan")
                 embed.setColor("#FFFF00")
                 let rmsg = await msg.channel.send({embeds:[embed]})
                 await rmsg.react("✅")
@@ -53,24 +55,36 @@ const command = {
                         if(text == "✅"){
                             if(profileData.camps.yourCamp < 6){
                                 let pId = profileData.camps.yourCamp
-                                let money = profileData.money
+                                let yourMoney = profileData.money
                                 let cost;
-                                if(money >= 2500 && pId == 0){
+                                if(yourMoney >= 2500 && pId == 0){
                                     cost = 2500
                                 }
-                                else if(money >= 10000 && pId == 1){
+                                else if(yourMoney >= 10000 && pId == 1){
                                     cost = 10000
                                 }
-                                else if(money >= 30000 && pId == 2){
+                                else if(yourMoney >= 30000 && pId == 2){
                                     cost = 30000
                                 }
-                                else if(money >= 75000 && pId == 3){
+                                else if(yourMoney >= 75000 && pId == 3){
                                     cost = 75000
                                 }
-                                else if(money >= 125000 && pId == 4){
+                                else if(yourMoney >= 125000 && pId == 4){
                                     cost = 125000
                                 }
 
+                                const then = new Date(profileData.campCooldown).getTime()
+                                const now = new Date().getTime()
+
+                                let timeout = 1000 * 60 * 60 * 12
+                                if(timeout - (now - then) > 0){
+                                    let timeLeft = ms(timeout - (now - then))
+                                    const embed = new MessageEmbed()
+                                    .setDescription(`**Anda sedang dalam cooldown!**\n**${timeLeft.hours} jam ${timeLeft.minutes} menit**`)
+                                    .setColor("#FF0000")
+                                    msg.channel.send({embeds:[embed]})
+                                    return
+                                }
 
                                 if(profileData.money < cost){
                                     const embed = new MessageEmbed()
@@ -79,9 +93,10 @@ const command = {
                                     msg.channel.send({embeds:[embed]})
                                 }
                                 else{
-                                    let yourMoney = profileData.money - cost
+                                    const updateMoney = yourMoney - cost
+                                    console.log(updateCamp)
                                     let updateCamp = {
-                                        money: yourMoney,
+                                        money: updateMoney,
                                         camps:{
                                             yourCamp: pId + 1,
                                             allCamp: [
@@ -99,7 +114,8 @@ const command = {
                                                 75000,
                                                 125000
                                             ]
-                                        }
+                                        },
+                                        campCooldown: new Date()
                                     }
                                     await userProfile.findOneAndUpdate({userID: id}, updateCamp, {new: true})
                                 
@@ -141,3 +157,29 @@ const command = {
 }
 
 export default command;
+
+function upgradeCamp(money, id){
+    let newID;
+    let cost;
+    if(money >= 2500 && id == 0){
+        newID = 1
+        cost = 2500
+    }
+    else if(money >= 10000 && id == 1){
+        newID = 2
+        cost = 10000
+    }
+    else if(money >= 30000 && id == 2){
+        newID = 3
+        cost = 30000
+    }
+    else if(money >= 75000 && id == 3){
+        newID = 4
+        cost = 75000
+    }
+    else if(money >= 125000 && id == 4){
+        newID = 5
+        cost = 125000
+    }
+    return [newID, cost]
+}

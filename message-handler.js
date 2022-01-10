@@ -21,6 +21,9 @@ export default function messageHandler(client) {
             else if(command == "me"){
                 client.commands.get('info-me').execute(msg, client)
             }
+            else if(command == "welcometest"){
+                client.commands.get('welcome-image').execute(msg, client)
+            }
             
         }
     })
@@ -28,6 +31,7 @@ export default function messageHandler(client) {
     client.on("messageCreate", async msg =>{
         const haramWords = ["hentai","nhentai","nekopoi","bokep","kontol","titit","titid","tytyd","tytyt","mengontol","gontol","ngocok","goblok","geblek","bangsat", "porn", "memek", "jancok", "ngentot", "entot", "ngewe", "nigga", "gay", "sex"]
         if(msg.content){
+            if(msg.author.id == "844617532517777409") return
             for (var i = 0; i < haramWords.length; i++) {
                 if (msg.content.toLowerCase().includes(haramWords[i])) {
                     client.commands.get('warn-user').execute(msg, client)
@@ -39,11 +43,7 @@ export default function messageHandler(client) {
 
     client.on('guildMemberAdd', async member =>{
         //Send a message if user is join
-        const channelJoinId = '783343899996323911'
-        const message = `Selamat datang di ${member.guild.name}, <@${member.id}>.\nTolong baca peraturan di <#919417694397268059> dulu. Semoga betah disini ya ⛺`
-        const channel = member.guild.channels.cache.get(channelJoinId)
-
-        channel.send(message);
+        client.commands.get('welcome-image').execute(member, client)
     })
 
     client.on('guildMemberRemove', async member =>{

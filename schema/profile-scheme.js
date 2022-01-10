@@ -27,25 +27,27 @@ const profileSchema = new mongoose.Schema(
         }},
         //Food
         foods: {type: Object, default: {
-            pinecone: 10,
-            stick: 5,
-            wood: 0
-        }},
-
-        //Items
-        items: { type: Object, default:{
             curryNoodles: 2,
             soupPasta: 0,
             friedSoftBoiledEgg:0,
             yakiton: 0,
             gyozaNabe: 0
+            
+        }},
+
+        //Items
+        items: { type: Object, default:{
+            pinecone: 10,
+            stick: 5,
+            wood: 0
         }},
 
         
 
         //Cooldown Command
         dailyCooldown: {type: Date, default: new Date(2018, 11)},
-        collectCooldown: {type: Date, default: new Date(2018, 11)}
+        collectCooldown: {type: Date, default: new Date(2018, 11)},
+        campCooldown: {type: Date, default: new Date(2018, 11)}
     }
 )
 

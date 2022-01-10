@@ -28,7 +28,7 @@ const command = {
             if(timeout - (now - then) > 0){
                 let timeLeft = ms(timeout - (now - then))
                 const embed = new MessageEmbed()
-                .setDescription(`Tunggu **${timeLeft.minutes} menit** sebelum menggunakan command ini!`)
+                .setDescription(`Tunggu **${timeLeft.minutes} menit ${timeLeft.seconds} detik** sebelum menggunakan command ini!`)
                 .setColor("#FF0000")
                 msg.channel.send({embeds:[embed]})
                 return
@@ -39,12 +39,14 @@ const command = {
                 let pc = profileData.items.pinecone  += collection[0]
                 let woodStick = profileData.items.stick  += collection[1]
                 let woodLog = profileData.items.wood += collection[2]
-                const object = { items: {
-                    pinecone: pc,
-                    stick: woodStick,
-                    wood: woodLog || 0
-                },
-                collectCooldown: new Date()}
+                const object = {
+                    items: {
+                        pinecone: pc,
+                        stick: woodStick,
+                        wood: woodLog || 0
+                    },
+                    collectCooldown: new Date()
+                }
                 await userProfile.findOneAndUpdate({userID:id}, object, {new:true})
                 
                 if(collection[2] == 0){
@@ -61,32 +63,6 @@ const command = {
 }
 
 export default command;
-
-function upgradeCamp(money, id){
-    let newID;
-    let cost;
-    if(money >= 2500 && id == 0){
-        newID = 1
-        cost = 2500
-    }
-    else if(money >= 10000 && id == 1){
-        newID = 2
-        cost = 10000
-    }
-    else if(money >= 30000 && id == 2){
-        newID = 3
-        cost = 30000
-    }
-    else if(money >= 75000 && id == 3){
-        newID = 4
-        cost = 75000
-    }
-    else if(money >= 125000 && id == 4){
-        newID = 5
-        cost = 125000
-    }
-    return [newID, cost]
-}
 
 function collectCalculation(id){
     let pineCone;
