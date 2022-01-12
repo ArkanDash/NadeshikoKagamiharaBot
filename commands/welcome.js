@@ -21,11 +21,21 @@ const command = {
 
         context.font = '28px sans-serif';
         context.fillStyle = '#ffffff';
-        context.fillText(`Selamat datang di ${msg.guild.name}`, canvas.width / 2.5, canvas.height / 3.5);
+        context.fillText(`Selamat datang di ${msg.guild.name}`, canvas.width / 2.75, canvas.height / 3.5);
 
         context.font = applyText(canvas, msg.author.username);
         context.fillStyle = '#ffffff';
-        context.fillText(msg.author.username, canvas.width / 2.5, canvas.height / 1.8);
+        context.fillText(msg.author.username, canvas.width / 2.75, canvas.height / 1.5);
+
+        context.fillStyle = '#ff1493';
+        context.beginPath();
+        context.arc(125, 125, 110, 0, Math.PI * 2, true);
+        context.fill();
+
+        context.fillStyle = '#808080';
+        context.beginPath();
+        context.arc(125, 125, 105, 0, Math.PI * 2, true);
+        context.fill();
 
         context.beginPath();
         context.arc(125, 125, 100, 0, Math.PI * 2, true);

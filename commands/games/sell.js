@@ -1,16 +1,33 @@
 import { MessageEmbed } from 'discord.js'
 import userProfile from "../../schema/profile-scheme.js"
-const itemID = new Array("pinecone", "stick", "wood")
+
+const pineconeItem = new Array("pinecone", "pc")
+const stickItem = new Array("stick", "stik")
+const woodItem = new Array("wood", "kayu")
 
 const command = {
     name:"sell-game",
     description:"Sell items",
-    async execute(msg, item, jumlahItem, client){  
+    async execute(msg, item, jumlahItem, client){
+        let profileData;
+        try{
+            profileData = await userProfile.findOne({ userID: msg.author.id })
+        }
+        catch(e){
+            
+        }
+        if(!profileData){
+            const embed = new MessageEmbed()
+            .setDescription("Pengguna baru?\nKetik `.profile` untuk mendaftarkan akun kamu")
+            .setColor("#FF0000")
+            msg.channel.send({embeds:[embed]})
+            return
+        }
 
         if(!item){
             const embed = new MessageEmbed()
             .setTitle("Jual Item")
-            .setDescription(`List Item\n\nPinecone = 💴 15\nStick = 💴 50\nWood = 💴 125\n\nPastikan nama item yang kamu jual harus sama dengan yang di list.`)
+            .setDescription("List Item\n\nPinecone = 💴 15\n`id:pinecone`\n\nStick = 💴 50\n`id:stick`\n\nWood = 💴 125\n`id:wood`\n\nPastikan nama item yang ingin kamu jual harus sama dengan id di list.")
             .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
             return
@@ -18,13 +35,13 @@ const command = {
         let itemName = item.toLowerCase()
         let totalItem = parseInt(jumlahItem) || 1;
 
-        if(itemName == "pinecone"){
+        if(pineconeItem.includes(itemName)){
             itemSell(msg, itemName, totalItem)
         }
-        else if(itemName == "stick"){
+        else if(stickItem.includes(itemName)){
             itemSell(msg, itemName, totalItem)
         }
-        else if(itemName == "wood"){
+        else if(woodItem.includes(itemName)){
             itemSell(msg, itemName, totalItem)
         }
         else{
@@ -94,21 +111,17 @@ async function itemSell(msg, item, totalItem){
 
         if(text == "✅"){
             let yourPc = profileData.items.pinecone
-            let yourWoodStick = profileData.items.stick
-            let yourWoodLog = profileData.items.wood
-            let yourMoney = profileData.money + totalPrice
+            let yourStick = profileData.items.stick
+            let yourWood = profileData.items.wood
+            let yourMoney = profileData.money
             if(item == "pinecone" && yourPc >= totalItem){
-                let pc = yourPc - totalItem
-                let woodStick = yourWoodStick
-                let woodLog = yourWoodLog
                 const object = {
-                    money: yourMoney,
+                    money: yourMoney + totalPrice,
                     items: {
-                        pinecone: pc,
-                        stick: woodStick,
-                        wood: woodLog,
-                    },
-                    collectCooldown: new Date()
+                        pinecone: yourPinecone - totalItem,
+                        stick: yourStick,
+                        wood: yourWood,
+                    }
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
 
@@ -118,17 +131,13 @@ async function itemSell(msg, item, totalItem){
                 msg.channel.send({embeds:[embed]})
             }
             else if(item == "stick" && yourWoodStick >= totalItem){
-                let pc = yourPc
-                let woodStick = yourWoodStick - totalItem
-                let woodLog = yourWoodLog
                 const object = {
-                    money: yourMoney,
+                    money: yourMoney + totalPrice,
                     items: {
-                        pinecone: pc,
-                        stick: woodStick,
-                        wood: woodLog,
-                    },
-                    collectCooldown: new Date()
+                        pinecone: yourPinecone,
+                        stick: yourStick,
+                        wood: yourWood - totalItem,
+                    }
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
 
@@ -138,17 +147,13 @@ async function itemSell(msg, item, totalItem){
                 msg.channel.send({embeds:[embed]})
             }
             else if(item == "wood" && yourWoodLog >= totalItem){
-                let pc = yourPc
-                let woodStick = yourWoodStick
-                let woodLog = yourWoodLog - totalItem
                 const object = {
-                    money: yourMoney,
+                    money: yourMoney + totalPrice,
                     items: {
-                        pinecone: pc,
-                        stick: woodStick,
-                        wood: woodLog,
-                    },
-                    collectCooldown: new Date()
+                        pinecone: yourPinecone,
+                        stick: yourStick,
+                        wood: yourWood - totalItem,
+                    }
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
 

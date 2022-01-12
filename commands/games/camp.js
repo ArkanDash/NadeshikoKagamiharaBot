@@ -23,7 +23,7 @@ const command = {
         else{
             if(profileData.camps.yourCamp < 5){
                 const embed = new MessageEmbed()
-                for(let i = 0; i < 6; i++){
+                for(let i = 0; i < 7; i++){
                     if(profileData.camps.yourCamp == i){
                         embed.setDescription(`🏕 Apakah kamu ingin pindah kamping ke ${profileData.camps.allCamp[i+1]}?\n💴 **${profileData.camps.campCost[i]} yen**`)
                         break;
@@ -57,20 +57,23 @@ const command = {
                                 let pId = profileData.camps.yourCamp
                                 let yourMoney = profileData.money
                                 let cost;
-                                if(yourMoney >= 2500 && pId == 0){
-                                    cost = 2500
+                                if(yourMoney >= 5000 && pId == 0){
+                                    cost = 5000
                                 }
-                                else if(yourMoney >= 10000 && pId == 1){
-                                    cost = 10000
+                                else if(yourMoney >= 25000 && pId == 1){
+                                    cost = 25000
                                 }
-                                else if(yourMoney >= 30000 && pId == 2){
-                                    cost = 30000
+                                else if(yourMoney >= 50000 && pId == 2){
+                                    cost = 50000
                                 }
-                                else if(yourMoney >= 75000 && pId == 3){
-                                    cost = 75000
+                                else if(yourMoney >= 250000 && pId == 3){
+                                    cost = 250000
                                 }
-                                else if(yourMoney >= 125000 && pId == 4){
-                                    cost = 125000
+                                else if(yourMoney >= 750000 && pId == 4){
+                                    cost = 750000
+                                }
+                                else if(yourMoney >= 1500000 && pId == 5){
+                                    cost = 1500000
                                 }
 
                                 const then = new Date(profileData.campCooldown).getTime()
@@ -105,6 +108,7 @@ const command = {
                                                 "Perkemahan Fumotoppara",
                                                 "Dataran Tinggi Takabocchi",
                                                 "Jukaino Bokujou",
+                                                "Danau Shibire",
                                                 "Gunung Fuji"
                                             ],
                                             campCost: [
@@ -112,7 +116,8 @@ const command = {
                                                 10000,
                                                 30000,
                                                 75000,
-                                                125000
+                                                125000,
+                                                300000
                                             ]
                                         },
                                         campCooldown: new Date()
@@ -120,7 +125,7 @@ const command = {
                                     await userProfile.findOneAndUpdate({userID: id}, updateCamp, {new: true})
                                 
                                     const embed2 = new MessageEmbed()
-                                    for(let i = 0; i < 6; i++){
+                                    for(let i = 0; i < 7; i++){
                                         if(profileData.camps.yourCamp == i){
                                             embed2.setDescription(`Perkemahan kamu sekarang pindah di ${profileData.camps.allCamp[i+1]}`)
                                             break;
@@ -157,29 +162,3 @@ const command = {
 }
 
 export default command;
-
-function upgradeCamp(money, id){
-    let newID;
-    let cost;
-    if(money >= 2500 && id == 0){
-        newID = 1
-        cost = 2500
-    }
-    else if(money >= 10000 && id == 1){
-        newID = 2
-        cost = 10000
-    }
-    else if(money >= 30000 && id == 2){
-        newID = 3
-        cost = 30000
-    }
-    else if(money >= 75000 && id == 3){
-        newID = 4
-        cost = 75000
-    }
-    else if(money >= 125000 && id == 4){
-        newID = 5
-        cost = 125000
-    }
-    return [newID, cost]
-}

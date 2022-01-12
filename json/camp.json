@@ -5,14 +5,16 @@
         "Perkemahan Kōan",
         "Perkemahan Fumotoppara",
         "Dataran Tinggi Takabocchi",
+        "Danau Shibire",
         "Jukaino Bokujou",
         "Gunung Fuji"        
     ],
     "campCost":[
-        2500,
-        10000,
-        30000,
-        75000,
-        125000
+        5000,
+        25000,
+        50000,
+        250000,
+        750000,
+        1500000
     ]
 }

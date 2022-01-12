@@ -1,11 +1,12 @@
 import { MessageEmbed } from 'discord.js'
 import userProfile from "../../schema/profile-scheme.js"
 
-const mieKari = new Array("noodle", "curry", "curry noodle", "mie kari")
-const supPasta = new Array("sup", "soup", "sup pasta", "soup pasta")
-const deepFriedEgg = new Array("egg","fried soft boiled egg", "deep fried egg")
+const mieKari = new Array("noodle", "curry", "currynoodle", "miekari")
+const deepFriedEgg = new Array("egg","friedsoftboiledegg", "deepfriedegg")
+const beefborscht = new Array("beefborscht","beetborscht", "borscht")
+const supPasta = new Array("sup", "soup", "suppasta", "souppasta")
 const sateDagingBabi = new Array("yakiton","daging", "babi", "sate", "satay")
-const hotpot = new Array("hotpot", "gyoza", "gyoza nabe")
+const hotpot = new Array("hotpot", "gyoza", "gyozanabe")
 
 const command = {
     name:"eat-game",
@@ -18,10 +19,18 @@ const command = {
         catch(e){
             
         }
+        if(!profileData){
+            const embed = new MessageEmbed()
+            .setDescription("Pengguna baru?\nKetik `.profile` untuk mendaftarkan akun kamu")
+            .setColor("#FF0000")
+            msg.channel.send({embeds:[embed]})
+            return
+        }
+
         if(!makanan){
             const embed = new MessageEmbed()
             .setTitle("List Makanan")
-            .setDescription(`List Makanan yang kamu punya: \n\n[blm ada untuk sementara]\n\nPastikan nama makanan yang kamu jual harus sama dengan yang di list.`)
+            .setDescription("List Makanan yang kamu punya: \n\nCurry Noodle = ⚡ 15\n`id:curry`\n\nFried Soft-Boiled Egg = ⚡ 10\n`id:egg`\n\nBeet and Beef Borscht = ⚡ 50\n`id:borscht`\n\nSoup Style Pasta = ⚡ 75\n`id:soup`\n\nYakiton = ⚡ 25\n`id:yakiton`\n\nGyoza Nabe = ⚡ 90\n`id:hotpot`\n\nPastikan nama makanan yang kamu makan harus sama dengan id di list.")
             .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
             return
@@ -32,11 +41,14 @@ const command = {
         if(mieKari.includes(foodName)){
             itemSell(msg, "curryNoodle", totalFood, profileData)
         }
-        else if(supPasta.includes(foodName)){
-            itemSell(msg, "soupPasta", totalFood, profileData)
-        }
         else if(deepFriedEgg.includes(foodName)){
             itemSell(msg, "friedSoftBoiledEgg", totalFood, profileData)
+        }
+        else if(beefborscht.includes(foodName)){
+            itemSell(msg, "borscht", totalFood, profileData)
+        }
+        else if(supPasta.includes(foodName)){
+            itemSell(msg, "soupPasta", totalFood, profileData)
         }
         else if(sateDagingBabi.includes(foodName)){
             itemSell(msg, "yakiton", totalFood, profileData)
@@ -62,17 +74,21 @@ async function itemSell(msg, food, totalFood, profileData){
         makanan = "Curry Noodle"
         stamina = 15
     }
-    else if(food == "soupPasta"){
-        makanan = "Soup Pasta"
-        stamina = 25
-    }
     else if(food == "friedSoftBoiledEgg"){
         makanan = "Fried Soft Boiled Egg"
-        stamina = 45
+        stamina = 10
+    }
+    else if(food == "borscht"){
+        makanan = "Borscht"
+        stamina = 50
+    }
+    else if(food == "soupPasta"){
+        makanan = "Soup Pasta"
+        stamina = 75
     }
     else if(food == "yakiton"){
         makanan = "Yakiton"
-        stamina = 65
+        stamina = 25
     }
     else if(food == "gyozaNabe"){
         makanan = "Gyoza Nabe"
@@ -114,35 +130,21 @@ async function itemSell(msg, food, totalFood, profileData){
 
         if(text == "✅"){
             let cryNod = profileData.foods.curryNoodles
-            let soupPasta = profileData.foods.soupPasta
             let fsbe = profileData.foods.friedSoftBoiledEgg
+            let borscht = profileData.foods.beetAndBeefBorscht
+            let soupPasta = profileData.foods.soupPasta
             let ykton = profileData.foods.yakiton
             let gyoza = profileData.foods.gyozaNabe
             if(makanan == "Curry Noodle" && cryNod >= totalFood){
                 const object = {
                     foods: {
                         "curryNoodles": cryNod - totalFood,
+                        "friedSoftBoiledEgg": fsbe,
+                        "beetAndBeefBorscht": borscht,
                         "soupPasta": soupPasta,
-                        "friedSoftBoiledEgg":fsbe,
                         "yakiton": ykton,
                         "gyozaNabe": gyoza
-                    },
-                    collectCooldown: new Date()
-                }
-                await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
-
-                sendMessage(msg, stamina, makanan, totalFood)
-            }
-            else if(makanan == "Soup Pasta" && soupPasta >= totalFood){
-                const object = {
-                    foods: {
-                        "curryNoodles": cryNod,
-                        "soupPasta": soupPasta - totalFood,
-                        "friedSoftBoiledEgg":fsbe,
-                        "yakiton": ykton,
-                        "gyozaNabe": gyoza
-                    },
-                    collectCooldown: new Date()
+                    }
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
 
@@ -152,12 +154,42 @@ async function itemSell(msg, food, totalFood, profileData){
                 const object = {
                     foods: {
                         "curryNoodles": cryNod,
+                        "friedSoftBoiledEgg": fsbe - totalFood,
+                        "beetAndBeefBorscht": borscht,
                         "soupPasta": soupPasta,
-                        "friedSoftBoiledEgg":fsbe - totalFood,
                         "yakiton": ykton,
                         "gyozaNabe": gyoza
-                    },
-                    collectCooldown: new Date()
+                    }
+                }
+                await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
+
+                sendMessage(msg, stamina, makanan, totalFood)
+            }
+            else if(makanan == "Borscht" && borscht >= totalFood){
+                const object = {
+                    foods: {
+                        "curryNoodles": cryNod,
+                        "friedSoftBoiledEgg": fsbe,
+                        "beetAndBeefBorscht": borscht - totalFood,
+                        "soupPasta": soupPasta,
+                        "yakiton": ykton,
+                        "gyozaNabe": gyoza
+                    }
+                }
+                await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
+
+                sendMessage(msg, stamina, makanan, totalFood)
+            }
+            else if(makanan == "Soup Pasta" && soupPasta >= totalFood){
+                const object = {
+                    foods: {
+                        "curryNoodles": cryNod,
+                        "friedSoftBoiledEgg": fsbe,
+                        "beetAndBeefBorscht": borscht,
+                        "soupPasta": soupPasta - totalFood,
+                        "yakiton": ykton,
+                        "gyozaNabe": gyoza
+                    }
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
 
@@ -167,12 +199,12 @@ async function itemSell(msg, food, totalFood, profileData){
                 const object = {
                     foods: {
                         "curryNoodles": cryNod,
+                        "friedSoftBoiledEgg": fsbe,
+                        "beetAndBeefBorscht": borscht,
                         "soupPasta": soupPasta,
-                        "friedSoftBoiledEgg":fsbe,
                         "yakiton": ykton - totalFood,
                         "gyozaNabe": gyoza
-                    },
-                    collectCooldown: new Date()
+                    }
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
 
@@ -182,12 +214,12 @@ async function itemSell(msg, food, totalFood, profileData){
                 const object = {
                     foods: {
                         "curryNoodles": cryNod,
+                        "friedSoftBoiledEgg": fsbe,
+                        "beetAndBeefBorscht": borscht,
                         "soupPasta": soupPasta,
-                        "friedSoftBoiledEgg":fsbe,
                         "yakiton": ykton,
                         "gyozaNabe": gyoza - totalFood
-                    },
-                    collectCooldown: new Date()
+                    }
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
 

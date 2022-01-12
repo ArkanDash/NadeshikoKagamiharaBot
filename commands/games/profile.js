@@ -18,7 +18,7 @@ const command = {
         if(!profileData){
             profileData = await userProfile.create({
                 userID: id,
-                money: 1000,
+                money: 2500,
                 camps: JSON.parse(await readFile("./json/camp.json")),
                 foods: JSON.parse(await readFile("./json/food.json")),
                 items: JSON.parse(await readFile("./json/items.json"))   
@@ -30,7 +30,7 @@ const command = {
             .setColor("#00FF00")
             const embed2 = new MessageEmbed()
 
-            for(let i = 0; i < 6; i++){
+            for(let i = 0; i < 7; i++){
                 if(i == profileData.camps.yourCamp){
                     embed2.setDescription(`Perkemahan kamu berada di ${profileData.camps.allCamp[i]}`)
                     break;
@@ -44,7 +44,7 @@ const command = {
                     name: 'Total Uang', value: `💴 ${profileData.money} yen`, inline: true
                 },
                 {
-                    name: 'Stok Makanan', value: `Curry Noodle x${profileData.foods.curryNoodles}\nSoup Style Pasta x${profileData.foods.soupPasta}\nFried Soft-Boiled Egg x${profileData.foods.friedSoftBoiledEgg}\nYakiton x${profileData.foods.yakiton}\nGyoza Nabe x${profileData.foods.gyozaNabe}` 
+                    name: 'Stok Makanan', value: `Curry Noodle x${profileData.foods.curryNoodles}\nFried Soft-Boiled Egg x${profileData.foods.friedSoftBoiledEgg}\nBeet and Beef Borscht x${profileData.foods.beetAndBeefBorscht}\nSoup Style Pasta x${profileData.foods.soupPasta}\nYakiton x${profileData.foods.yakiton}\nGyoza Nabe x${profileData.foods.gyozaNabe}`
                 },
                 {
                     name: 'Items', value: `Pinecone x${profileData.items.pinecone}\nWooden Stick x${profileData.items.stick}\nWood Log x${profileData.items.wood}`
@@ -55,7 +55,7 @@ const command = {
         }
         else{
             const embed = new MessageEmbed()
-            for(let i = 0; i < 6; i++){
+            for(let i = 0; i < 7; i++){
                 if(i == profileData.camps.yourCamp){
                     embed.setDescription(`Perkemahan kamu berada di ${profileData.camps.allCamp[i]}`)
                     break;
@@ -69,7 +69,7 @@ const command = {
                     name: 'Total Uang', value: `💴 ${profileData.money} yen`, inline: true
                 },
                 {
-                    name: 'Stok Makanan', value: `Curry Noodle x${profileData.foods.curryNoodles}\nSoup Style Pasta x${profileData.foods.soupPasta}\nFried Soft-Boiled Egg x${profileData.foods.friedSoftBoiledEgg}\nYakiton x${profileData.foods.yakiton}\nGyoza Nabe x${profileData.foods.gyozaNabe}` 
+                    name: 'Stok Makanan', value: `Curry Noodle x${profileData.foods.curryNoodles}\nFried Soft-Boiled Egg x${profileData.foods.friedSoftBoiledEgg}\nBeet and Beef Borscht x${profileData.foods.beetAndBeefBorscht}\nSoup Style Pasta x${profileData.foods.soupPasta}\nYakiton x${profileData.foods.yakiton}\nGyoza Nabe x${profileData.foods.gyozaNabe}` 
                 },
                 {
                     name: 'Items', value: `Pinecone x${profileData.items.pinecone}\nWooden Stick x${profileData.items.stick}\nWood Log x${profileData.items.wood}`

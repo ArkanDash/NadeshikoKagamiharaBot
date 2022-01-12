@@ -5,7 +5,7 @@ const profileSchema = new mongoose.Schema(
     {
         //User Data
         userID: {type: String, required: true, unique:true},
-        money: {type: Number, default: 1000},
+        money: {type: Number, default: 2500},
         //Camp Area
         camps: {type: Object, default: {
             yourCamp: 0,
@@ -14,25 +14,27 @@ const profileSchema = new mongoose.Schema(
                 "Perkemahan Kōan",
                 "Perkemahan Fumotoppara",
                 "Dataran Tinggi Takabocchi",
+                "Danau Shibire",
                 "Jukaino Bokujou",
-                "Gunung Fuji"
+                "Gunung Fuji"  
             ],
             campCost: [
-                2500,
-                10000,
-                30000,
-                75000,
-                125000
+                5000,
+                25000,
+                50000,
+                250000,
+                750000,
+                1500000
             ]
         }},
         //Food
         foods: {type: Object, default: {
             curryNoodles: 2,
-            soupPasta: 0,
             friedSoftBoiledEgg:0,
+            beetAndBeefBorscht:0,
+            soupPasta: 0,
             yakiton: 0,
             gyozaNabe: 0
-            
         }},
 
         //Items
