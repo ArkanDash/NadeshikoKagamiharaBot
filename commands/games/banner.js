@@ -2,9 +2,9 @@ import { MessageEmbed } from 'discord.js'
 import userProfile from '../../schema/profile-scheme.js';
 
 const command = {
-    name:"footer-game",
-    description:"Set a custom footer on profile embed",
-    async execute(int, footerText, imageLink, client){
+    name:"banner-game",
+    description:"Set a custom banner on profile embed",
+    async execute(int, imageLink, client){
         let profileData;
         try{
             profileData = await userProfile.findOne({ userID: int.user.id })
@@ -23,31 +23,19 @@ const command = {
         if(imageLink.indexOf("http://") == 0 || imageLink.indexOf("https://") == 0) {
             let userID = int.user.id
             let object = {
-                footerText: footerText,
-                footerLink: imageLink
+                bannerImage: imageLink
             }
             await userProfile.findOneAndUpdate({ userID }, object ,{ new: true })
             const embed = new MessageEmbed()
             .setDescription("Berhasil di set!")
             .setColor("#00FF00")
-            .setFooter({
-                text: footerText,
-                iconURL: imageLink
-            })
+            .setImage(imageLink)
             int.reply({embeds:[embed]})
         }
         else{
-            let userID = int.user.id
-            let object = {
-                footerText: footerText
-            }
-            await userProfile.findOneAndUpdate({ userID }, object ,{ new: true })
             const embed = new MessageEmbed()
-            .setDescription("Berhasil di set!")
-            .setColor("#00FF00")
-            .setFooter({
-                text: footerText
-            })
+            .setDescription("Link gambar tidak dapat diambil. Coba cek lagi.")
+            .setColor("#FF0000")
             int.reply({embeds:[embed]})
         }
 

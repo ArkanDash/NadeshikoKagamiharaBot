@@ -54,7 +54,9 @@ const profileSchema = new mongoose.Schema(
         campCooldown: {type: Date, default: new Date(2018, 11)},
 
         //User Customization
-        footer: {type: String, default: ""}
+        bannerImage: {type: String, default: ""},
+        footerText: {type: String, default: ""},
+        footerLink: {type: String, default: ""}
     }
 )
 

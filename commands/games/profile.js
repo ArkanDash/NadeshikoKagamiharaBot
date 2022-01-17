@@ -1,6 +1,7 @@
 import { MessageEmbed } from 'discord.js'
 import userProfile from "../../schema/profile-scheme.js"
 import { readFile } from "fs/promises"
+import { profile } from 'console';
 
 const command = {
     name:"profile-game",
@@ -56,9 +57,23 @@ const command = {
                     name: 'Hunger', value: `⚡ ${profileData.hunger}%`, inline: true
                 }
             )
-            embed2.setImage("https://static.wikia.nocookie.net/yuru-camp/images/5/57/Yuru_Camp_Art.jpg")
             if(profileData.footer !== ""){
-                embed2.setFooter(profileData.footer)
+                embed2.setFooter({
+                    text:profileData.footerText,
+                    iconURL:profileData.footerLink
+                })
+            }
+            else{
+                embed2.setFooter({
+                    text:profileData.footerText
+                })
+            }
+
+            if(profileData.bannerImage !== ""){
+                embed2.setImage(profileData.bannerImage)
+            }
+            else{
+                embed2.setImage("https://static.wikia.nocookie.net/yuru-camp/images/5/57/Yuru_Camp_Art.jpg")
             }
             msg.channel.send({embeds:[embed, embed2]})
         }
@@ -90,9 +105,24 @@ const command = {
                     name: 'Hunger', value: `⚡ ${profileData.hunger}%`, inline: true
                 }
             )
-            embed.setImage("https://static.wikia.nocookie.net/yuru-camp/images/5/57/Yuru_Camp_Art.jpg")
+            
             if(profileData.footer !== ""){
-                embed2.setFooter(profileData.footer)
+                embed.setFooter({
+                    text:profileData.footerText,
+                    iconURL:profileData.footerLink
+                })
+            }
+            else{
+                embed.setFooter({
+                    text:profileData.footerText
+                })
+            }
+
+            if(profileData.bannerImage !== ""){
+                embed.setImage(profileData.bannerImage)
+            }
+            else{
+                embed.setImage("https://static.wikia.nocookie.net/yuru-camp/images/5/57/Yuru_Camp_Art.jpg")
             }
             msg.channel.send({embeds:[embed]})
         }

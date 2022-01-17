@@ -65,7 +65,7 @@ client.on('ready', async () => {
 //                       \\
 
 client.on("ready", async () => {
-    const guildId = '783343899565490246';
+    const guildId = '927118007564640286';
     const guild = client.guilds.cache.get(guildId);
     let slashCmd;
 
@@ -87,8 +87,8 @@ client.on("ready", async () => {
             },
             {
                 name:'status',
-                    description:'Online, Idle, Do Not Disrupt',
-                    choices:[
+                description:'Online, Idle, Do Not Disrupt',
+                choices:[
                     {
                         name:"Online",
                         value:"online"
@@ -110,6 +110,35 @@ client.on("ready", async () => {
             }
         ]
     })
+    slashCmd.create({
+        name:'custom-footer-game',
+        description:'Kustom footer untuk profile camp game',
+        options: [
+            {
+                name:'footer',
+                description:'Tuliskan deskripsi/kalimat untuk footer',
+                required:true,
+                type:Discord.Constants.ApplicationCommandOptionTypes.STRING
+            },
+            {
+                name:'image-footer',
+                description:'Gambar kecil di footer. [IMAGE LINK ONLY]',
+                type:Discord.Constants.ApplicationCommandOptionTypes.STRING
+            }
+        ]
+    })
+    slashCmd.create({
+        name:'custom-banner-image',
+        description:'Kustom gambar banner untuk profile camp game',
+        options: [
+            {
+                name:'banner-image',
+                description:'Link Image banner',
+                required:true,
+                type:Discord.Constants.ApplicationCommandOptionTypes.STRING
+            }
+        ]
+    })
 })
 
 
@@ -122,6 +151,15 @@ client.on("interactionCreate", async interaction =>{
         const activities = options.getString(`aktivitas`) || undefined
         const status = options.getString(`status`) || undefined
         client.commands.get('custom-presence').execute(interaction, activities, status, client);
+    }
+    else if(commandName == "custom-footer-game"){
+        const footerText = options.getString(`footer`)
+        const imageLink = options.getString(`image-footer`) || ""
+        client.commands.get('footer-game').execute(interaction, footerText, imageLink, client);
+    }
+    else if(commandName == "custom-banner-image"){
+        const imageLink = options.getString(`banner-image`) || ""
+        client.commands.get('banner-game').execute(interaction, imageLink, client);
     }
 })
 
