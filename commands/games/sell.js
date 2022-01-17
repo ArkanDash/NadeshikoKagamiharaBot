@@ -36,13 +36,13 @@ const command = {
         let totalItem = parseInt(jumlahItem) || 1;
 
         if(pineconeItem.includes(itemName)){
-            itemSell(msg, itemName, totalItem)
+            itemSell(msg, "pinecone", totalItem)
         }
         else if(stickItem.includes(itemName)){
-            itemSell(msg, itemName, totalItem)
+            itemSell(msg, "stick", totalItem)
         }
         else if(woodItem.includes(itemName)){
-            itemSell(msg, itemName, totalItem)
+            itemSell(msg, "wood", totalItem)
         }
         else{
             const embed = new MessageEmbed()
@@ -110,11 +110,11 @@ async function itemSell(msg, item, totalItem){
         
 
         if(text == "✅"){
-            let yourPc = profileData.items.pinecone
+            let yourPinecone = profileData.items.pinecone
             let yourStick = profileData.items.stick
             let yourWood = profileData.items.wood
             let yourMoney = profileData.money
-            if(item == "pinecone" && yourPc >= totalItem){
+            if(item == "pinecone" && yourPinecone >= totalItem){
                 const object = {
                     money: yourMoney + totalPrice,
                     items: {

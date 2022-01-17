@@ -58,7 +58,7 @@ const command = {
         }
         else{
             const embed = new MessageEmbed()
-            .setDescription(`Kamu mau makan apa? Batu? `)
+            .setDescription(`Makanan apa itu?`)
             .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
         }
@@ -135,7 +135,12 @@ async function itemSell(msg, food, totalFood, profileData){
             let soupPasta = profileData.foods.soupPasta
             let ykton = profileData.foods.yakiton
             let gyoza = profileData.foods.gyozaNabe
+            let oldHunger = profileData.hunger
             if(makanan == "Curry Noodle" && cryNod >= totalFood){
+                let newHunger = oldHunger + stamina;
+                if(newHunger >= 100){
+                    newHunger = 100
+                }
                 const object = {
                     foods: {
                         "curryNoodles": cryNod - totalFood,
@@ -144,13 +149,18 @@ async function itemSell(msg, food, totalFood, profileData){
                         "soupPasta": soupPasta,
                         "yakiton": ykton,
                         "gyozaNabe": gyoza
-                    }
+                    },
+                    hunger: newHunger
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
 
                 sendMessage(msg, stamina, makanan, totalFood)
             }
             else if(makanan == "Fried Soft Boiled Egg" && fsbe >= totalFood){
+                let newHunger = oldHunger + stamina;
+                if(newHunger >= 100){
+                    newHunger = 100
+                }
                 const object = {
                     foods: {
                         "curryNoodles": cryNod,
@@ -159,13 +169,18 @@ async function itemSell(msg, food, totalFood, profileData){
                         "soupPasta": soupPasta,
                         "yakiton": ykton,
                         "gyozaNabe": gyoza
-                    }
+                    },
+                    hunger: newHunger
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
 
                 sendMessage(msg, stamina, makanan, totalFood)
             }
             else if(makanan == "Borscht" && borscht >= totalFood){
+                let newHunger = oldHunger + stamina;
+                if(newHunger >= 100){
+                    newHunger = 100
+                }
                 const object = {
                     foods: {
                         "curryNoodles": cryNod,
@@ -174,13 +189,18 @@ async function itemSell(msg, food, totalFood, profileData){
                         "soupPasta": soupPasta,
                         "yakiton": ykton,
                         "gyozaNabe": gyoza
-                    }
+                    },
+                    hunger: newHunger
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
 
                 sendMessage(msg, stamina, makanan, totalFood)
             }
             else if(makanan == "Soup Pasta" && soupPasta >= totalFood){
+                let newHunger = oldHunger + stamina;
+                if(newHunger >= 100){
+                    newHunger = 100
+                }
                 const object = {
                     foods: {
                         "curryNoodles": cryNod,
@@ -189,13 +209,18 @@ async function itemSell(msg, food, totalFood, profileData){
                         "soupPasta": soupPasta - totalFood,
                         "yakiton": ykton,
                         "gyozaNabe": gyoza
-                    }
+                    },
+                    hunger: newHunger
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
 
                 sendMessage(msg, stamina, makanan, totalFood)
             }
             else if(makanan == "Yakiton" && ykton >= totalFood){
+                let newHunger = oldHunger + stamina;
+                if(newHunger >= 100){
+                    newHunger = 100
+                }
                 const object = {
                     foods: {
                         "curryNoodles": cryNod,
@@ -204,13 +229,18 @@ async function itemSell(msg, food, totalFood, profileData){
                         "soupPasta": soupPasta,
                         "yakiton": ykton - totalFood,
                         "gyozaNabe": gyoza
-                    }
+                    },
+                    hunger: newHunger
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
 
                 sendMessage(msg, stamina, makanan, totalFood)
             }
             else if(makanan == "Gyoza Nabe" && gyoza >= totalFood){
+                let newHunger = oldHunger + stamina;
+                if(newHunger >= 100){
+                    newHunger = 100
+                }
                 const object = {
                     foods: {
                         "curryNoodles": cryNod,
@@ -219,7 +249,8 @@ async function itemSell(msg, food, totalFood, profileData){
                         "soupPasta": soupPasta,
                         "yakiton": ykton,
                         "gyozaNabe": gyoza - totalFood
-                    }
+                    },
+                    hunger: newHunger
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
 
@@ -246,7 +277,7 @@ async function itemSell(msg, food, totalFood, profileData){
 async function sendMessage(msg, stamina, makanan, totalFood){
 
     const embed = new MessageEmbed()
-    .setDescription(`Anda memakan ${totalFood} ${makanan}\n⚡ +${stamina}`)
+    .setDescription(`Kamu memakan ${totalFood} ${makanan}\n⚡ +${stamina}`)
     .setColor("#FF0000")
     msg.channel.send({embeds:[embed]})
 }

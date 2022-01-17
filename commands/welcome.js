@@ -10,7 +10,7 @@ const command = {
         //const channel = member.guild.channels.cache.get(channelJoinId)
 
         //const canvas = Canvas.createCanvas(918, 368);
-        const canvas = Canvas.createCanvas(700, 250);
+        const canvas = Canvas.createCanvas(918, 368);
 		const context = canvas.getContext('2d');
         const background = await Canvas.loadImage('https://wallpaperboat.com/wp-content/uploads/2020/06/03/42361/aesthetic-anime-01-920x518.jpg');
 
@@ -19,30 +19,30 @@ const command = {
         context.lineWidth = 15;
         context.strokeRect(0, 0, canvas.width, canvas.height);
 
-        context.font = '28px sans-serif';
-        context.fillStyle = '#ffffff';
-        context.fillText(`Selamat datang di ${msg.guild.name}`, canvas.width / 2.75, canvas.height / 3.5);
+        context.font = '40px sans-serif';
+        context.fillStyle = '#000000';
+        context.fillText(`Selamat Datang di\n${msg.guild.name}`, canvas.width / 2.75, canvas.height / 3.5);
 
-        context.font = applyText(canvas, msg.author.username);
-        context.fillStyle = '#ffffff';
+        context.font = applyText(canvas, msg.author.username, 90);
+        context.fillStyle = '#000000';
         context.fillText(msg.author.username, canvas.width / 2.75, canvas.height / 1.5);
 
-        context.fillStyle = '#ff1493';
+        context.fillStyle = '#800080';
         context.beginPath();
-        context.arc(125, 125, 110, 0, Math.PI * 2, true);
+        context.arc(canvas.width/5, canvas.height/2, 125, 0, Math.PI * 2, true);
         context.fill();
 
         context.fillStyle = '#808080';
         context.beginPath();
-        context.arc(125, 125, 105, 0, Math.PI * 2, true);
+        context.arc(canvas.width/5, canvas.height/2, 119, 0, Math.PI * 2, true);
         context.fill();
 
         context.beginPath();
-        context.arc(125, 125, 100, 0, Math.PI * 2, true);
+        context.arc(canvas.width/5, canvas.height/2, 115, 0, Math.PI * 2, true);
         context.closePath();
         context.clip();
         const avatar = await Canvas.loadImage(msg.author.displayAvatarURL({ format: 'jpg' }));
-	    context.drawImage(avatar, 25, 25, 200, 200);
+	    context.drawImage(avatar, (canvas.width/5) - (256/2), (canvas.height/2) - (256/2), 256, 256);
     
         const attachment = new MessageAttachment(canvas.toBuffer(), 'user-image.png');
 
@@ -51,11 +51,8 @@ const command = {
 }
 export default command;
 
-const applyText = (canvas, text) => {
+const applyText = (canvas, text, fontSize) => {
 	const context = canvas.getContext('2d');
-
-	// Declare a base size of the font
-	let fontSize = 70;
 
 	do {
 		// Assign the font to the context and decrement it so it can be measured again

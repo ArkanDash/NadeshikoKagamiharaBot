@@ -44,12 +44,17 @@ const profileSchema = new mongoose.Schema(
             wood: 0
         }},
 
-        
+        //Data Progress
+        campFire:{type: Number, default: 80},
+        hunger:{type: Number, default: 80},
 
         //Cooldown Command
         dailyCooldown: {type: Date, default: new Date(2018, 11)},
         collectCooldown: {type: Date, default: new Date(2018, 11)},
-        campCooldown: {type: Date, default: new Date(2018, 11)}
+        campCooldown: {type: Date, default: new Date(2018, 11)},
+
+        //User Customization
+        footer: {type: String, default: ""}
     }
 )
 

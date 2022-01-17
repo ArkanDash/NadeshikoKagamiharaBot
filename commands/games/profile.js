@@ -48,9 +48,18 @@ const command = {
                 },
                 {
                     name: 'Items', value: `Pinecone x${profileData.items.pinecone}\nWooden Stick x${profileData.items.stick}\nWood Log x${profileData.items.wood}`
+                },
+                {
+                    name: 'Campfire', value: `<a:yc_campfire:927127127244017675> ${profileData.campFire}%`, inline: true
+                },
+                {
+                    name: 'Hunger', value: `⚡ ${profileData.hunger}%`, inline: true
                 }
             )
             embed2.setImage("https://static.wikia.nocookie.net/yuru-camp/images/5/57/Yuru_Camp_Art.jpg")
+            if(profileData.footer !== ""){
+                embed2.setFooter(profileData.footer)
+            }
             msg.channel.send({embeds:[embed, embed2]})
         }
         else{
@@ -73,9 +82,18 @@ const command = {
                 },
                 {
                     name: 'Items', value: `Pinecone x${profileData.items.pinecone}\nWooden Stick x${profileData.items.stick}\nWood Log x${profileData.items.wood}`
+                },
+                {
+                    name: 'Campfire', value: `<a:yc_campfire:927127127244017675> ${profileData.campFire}%`, inline: true
+                },
+                {
+                    name: 'Hunger', value: `⚡ ${profileData.hunger}%`, inline: true
                 }
             )
             embed.setImage("https://static.wikia.nocookie.net/yuru-camp/images/5/57/Yuru_Camp_Art.jpg")
+            if(profileData.footer !== ""){
+                embed2.setFooter(profileData.footer)
+            }
             msg.channel.send({embeds:[embed]})
         }
     }
