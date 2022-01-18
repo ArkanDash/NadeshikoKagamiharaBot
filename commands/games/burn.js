@@ -134,7 +134,7 @@ async function itemSell(msg, item, totalItem){
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
 
-                sendMessage(msg, campFireDuration, item, totalItem)
+                sendMessage(sellMsg, campFireDuration, item, totalItem)
             }
             else if(item == "stick" && yourStick >= totalItem){
                 let newCampFire = oldCampFire + campFireDuration;
@@ -151,7 +151,7 @@ async function itemSell(msg, item, totalItem){
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
 
-                sendMessage(msg, campFireDuration, item, totalItem)
+                sendMessage(sellMsg, campFireDuration, item, totalItem)
             }
             else if(item == "wood" && yourWood >= totalItem){
                 let newCampFire = oldCampFire + campFireDuration;
@@ -168,13 +168,13 @@ async function itemSell(msg, item, totalItem){
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
 
-                sendMessage(msg, campFireDuration, item, totalItem)
+                sendMessage(sellMsg, campFireDuration, item, totalItem)
             }
             else{
                 const embed = new MessageEmbed()
                 .setDescription("Bahan bakar yang kamu punya kurang.")
                 .setColor("#FF0000")
-                msg.channel.send({embeds:[embed]})
+                sellMsg.edit({embeds:[embed]})
                 return
             }
             
@@ -188,10 +188,10 @@ async function itemSell(msg, item, totalItem){
     })
 }
 
-async function sendMessage(msg, stamina, makanan, totalItem){
+async function sendMessage(sellMsg, campFireDuration, item, totalItem){
 
     const embed = new MessageEmbed()
-    .setDescription(`Kamu membakar ${totalFood} ${makanan}\n⚡ +${stamina}`)
-    .setColor("#FF0000")
-    msg.channel.send({embeds:[embed]})
+    .setDescription(`Kamu membakar ${totalItem} ${item}\n<a:yc_campfire:927127127244017675> +${campFireDuration}`)
+    .setColor("#00FF00")
+    sellMsg.edit({embeds:[embed]})
 }

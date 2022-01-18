@@ -76,7 +76,7 @@ async function itemSell(msg, item, totalItem){
     }
     let totalPrice = price * totalItem;
     const embed = new MessageEmbed()
-    .setDescription(`Apakah kamu ingin menjual **${totalItem} ${itemToSell}**\ndengan seharga **💴 ${totalPrice}**\nHarga per item = 💴 ${price}`)
+    .setDescription(`Apakah kamu ingin menjual **${totalItem} ${itemToSell}** dengan harga **💴 ${totalPrice}**\nHarga per item = 💴 ${price}`)
     .setColor("#FF0000")
     let sellMsg = await msg.channel.send({embeds:[embed]})
     sellMsg.react("✅")
@@ -124,11 +124,7 @@ async function itemSell(msg, item, totalItem){
                     }
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
-
-                const embed = new MessageEmbed()
-                .setDescription(`Barang berhasil di jual!\n💴 +${totalPrice}`)
-                .setColor("#FF0000")
-                msg.channel.send({embeds:[embed]})
+                sendMessage(sellMsg, totalPrice)
             }
             else if(item == "stick" && yourWoodStick >= totalItem){
                 const object = {
@@ -140,11 +136,7 @@ async function itemSell(msg, item, totalItem){
                     }
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
-
-                const embed = new MessageEmbed()
-                .setDescription(`Barang berhasil di jual!\n💴 +${totalPrice}`)
-                .setColor("#FF0000")
-                msg.channel.send({embeds:[embed]})
+                sendMessage(sellMsg, totalPrice)
             }
             else if(item == "wood" && yourWoodLog >= totalItem){
                 const object = {
@@ -156,20 +148,15 @@ async function itemSell(msg, item, totalItem){
                     }
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
-
-                const embed = new MessageEmbed()
-                .setDescription(`Barang berhasil di jual!\n💴 +${totalPrice}`)
-                .setColor("#FF0000")
-                msg.channel.send({embeds:[embed]})
+                sendMessage(sellMsg, totalPrice)
             }
             else{
                 const embed = new MessageEmbed()
                 .setDescription("Item yang kamu punya kurang\n\nPenjualan barang dibatalkan.")
                 .setColor("#FF0000")
-                msg.channel.send({embeds:[embed]})
+                sellMsg.edit({embeds:[embed]})
                 return
             }
-            
         }
         else if(text == "❌"){
             const embed = new MessageEmbed()
@@ -178,4 +165,11 @@ async function itemSell(msg, item, totalItem){
             sellMsg.edit({embeds:[embed]})
         }
     })
+}
+
+async function sendMessage(sellMsg, totalPrice){
+    const embed = new MessageEmbed()
+    .setDescription(`Barang berhasil di jual!\n💴 +${totalPrice}`)
+    .setColor("#00FF00")
+    sellMsg.edit({embeds:[embed]})
 }

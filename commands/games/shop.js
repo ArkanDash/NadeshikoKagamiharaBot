@@ -72,21 +72,27 @@ async function itemSell(msg, food, totalFood, profileData){
     let harga;
     if(food == "curryNoodle"){
         harga = 300
+        makanan = "Curry Noodle"
     }
     else if(food == "friedSoftBoiledEgg"){
         harga = 100
+        makanan = "Fried Soft Boiled Egg"
     }
     else if(food == "borscht"){
         harga = 1300
+        makanan = "Borscht"
     }
     else if(food == "soupPasta"){
         harga = 1500
+        makanan = "Soup Pasta"
     }
     else if(food == "yakiton"){
         harga = 500
+        makanan = "Yakiton"
     }
     else if(food == "gyozaNabe"){
         harga = 2500
+        makanan = "Gyoza Nabe"
     }
     let totalHarga = harga * totalFood
     const embed = new MessageEmbed()
@@ -131,9 +137,9 @@ async function itemSell(msg, food, totalFood, profileData){
             let ykton = profileData.foods.yakiton
             let gyoza = profileData.foods.gyozaNabe
             let yourMoney = profileData.money
-            if(makanan == "Curry Noodle" && cryNod >= totalFood){
+            if(makanan == "Curry Noodle" && yourMoney >= totalHarga){
                 const object = {
-                    money: yourMoney - totalPrice,
+                    money: yourMoney - totalHarga,
                     foods: {
                         "curryNoodles": cryNod + totalFood,
                         "friedSoftBoiledEgg": fsbe,
@@ -145,11 +151,11 @@ async function itemSell(msg, food, totalFood, profileData){
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
 
-                sendMessage(msg, makanan, totalFood)
+                sendMessage(sellMsg, makanan, totalFood, totalHarga)
             }
-            else if(makanan == "Fried Soft Boiled Egg" && fsbe >= totalFood){
+            else if(makanan == "Fried Soft Boiled Egg" && yourMoney >= totalHarga){
                 const object = {
-                    money: yourMoney - totalPrice,
+                    money: yourMoney - totalHarga,
                     foods: {
                         "curryNoodles": cryNod,
                         "friedSoftBoiledEgg": fsbe + totalFood,
@@ -161,11 +167,11 @@ async function itemSell(msg, food, totalFood, profileData){
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
 
-                sendMessage(msg, makanan, totalFood)
+                sendMessage(sellMsg, makanan, totalFood, totalHarga)
             }
-            else if(makanan == "Borscht" && borscht >= totalFood){
+            else if(makanan == "Borscht" && yourMoney >= totalHarga){
                 const object = {
-                    money: yourMoney - totalPrice,
+                    money: yourMoney - totalHarga,
                     foods: {
                         "curryNoodles": cryNod,
                         "friedSoftBoiledEgg": fsbe,
@@ -177,11 +183,11 @@ async function itemSell(msg, food, totalFood, profileData){
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
 
-                sendMessage(msg, makanan, totalFood)
+                sendMessage(sellMsg, makanan, totalFood, totalHarga)
             }
-            else if(makanan == "Soup Pasta" && soupPasta >= totalFood){
+            else if(makanan == "Soup Pasta" && yourMoney >= totalHarga){
                 const object = {
-                    money: yourMoney - totalPrice,
+                    money: yourMoney - totalHarga,
                     foods: {
                         "curryNoodles": cryNod,
                         "friedSoftBoiledEgg": fsbe,
@@ -193,11 +199,11 @@ async function itemSell(msg, food, totalFood, profileData){
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
 
-                sendMessage(msg, makanan, totalFood)
+                sendMessage(sellMsg, makanan, totalFood, totalHarga)
             }
-            else if(makanan == "Yakiton" && ykton >= totalFood){
+            else if(makanan == "Yakiton" && yourMoney >= totalHarga){
                 const object = {
-                    money: yourMoney - totalPrice,
+                    money: yourMoney - totalHarga,
                     foods: {
                         "curryNoodles": cryNod,
                         "friedSoftBoiledEgg": fsbe,
@@ -209,11 +215,11 @@ async function itemSell(msg, food, totalFood, profileData){
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
 
-                sendMessage(msg, makanan, totalFood)
+                sendMessage(sellMsg, makanan, totalFood, totalHarga)
             }
-            else if(makanan == "Gyoza Nabe" && gyoza >= totalFood){
+            else if(makanan == "Gyoza Nabe" && yourMoney >= totalHarga){
                 const object = {
-                    money: yourMoney - totalPrice,
+                    money: yourMoney - totalHarga,
                     foods: {
                         "curryNoodles": cryNod,
                         "friedSoftBoiledEgg": fsbe,
@@ -225,30 +231,30 @@ async function itemSell(msg, food, totalFood, profileData){
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
 
-                sendMessage(msg, makanan, totalFood)
+                sendMessage(sellMsg, makanan, totalFood, totalHarga)
             }
             else{
                 const embed = new MessageEmbed()
-                .setDescription("Makanan yang kamu punya kurang.")
+                .setDescription("Uang tidak cukup.")
                 .setColor("#FF0000")
-                msg.channel.send({embeds:[embed]})
+                sellMsg.edit({embeds:[embed]})
                 return
             }
             
         }
         else if(text == "❌"){
             const embed = new MessageEmbed()
-            .setDescription("Kamu tidak jadi makan")
+            .setDescription("Pembelian dibatalkan")
             .setColor("#FF0000")
             sellMsg.edit({embeds:[embed]})
         }
     })
 }
 
-async function sendMessage(msg, makanan, totalFood){
+async function sendMessage(sellMsg, makanan, totalFood, totalPrice){
 
     const embed = new MessageEmbed()
-    .setDescription(`Anda memakan ${totalFood} ${makanan}\n⚡ +${stamina}`)
-    .setColor("#FF0000")
-    msg.channel.send({embeds:[embed]})
+    .setDescription(`Anda membeli ${totalFood} ${makanan}\n💴 -${totalPrice}`)
+    .setColor("#00FF00")
+    sellMsg.edit({embeds:[embed]})
 }

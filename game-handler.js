@@ -19,7 +19,7 @@ export default function gameHandler(client){
 
     client.on("messageCreate", async msg =>{
         if(msg.author.bot) return;
-        if(msg.channel.id != "927118007564640289") return;
+        if(["932907896428199966", "927118007564640289"].includes(msg.channel.id)) return;
         if(msg.content.toLowerCase().indexOf(prefix) !== 0) return;
         
         const args = msg.content.slice(prefix.length).trim().split(/ +/g);

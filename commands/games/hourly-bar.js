@@ -7,7 +7,7 @@ const command = {
     description:"Bar Changes",
     async execute(client){
         let data = await userProfile.find({})
-        cron.schedule('0 */2 * * *', async () => {
+        cron.schedule('*/30 * * * *', async () => {
             //Setiap 2 Jam
             for(let i = 0; i < data.length; i++){
                 let userIDCheck = data[i].userID
@@ -31,7 +31,7 @@ const command = {
 export default command;
 
 async function findUserAndUpdateCampfire(userID, user){
-    let campfireDecrease = await rndInt(2, 15)
+    let campfireDecrease = await rndInt(5, 15)
     let object = {
         campFire: user.campFire - campfireDecrease
     }
@@ -40,7 +40,7 @@ async function findUserAndUpdateCampfire(userID, user){
 }
 
 async function findUserAndUpdateFood(userID, user){
-    let hungerDecrease = await rndInt(1, 10)
+    let hungerDecrease = await rndInt(10, 25)
     let object = {
         hunger: user.hunger - hungerDecrease
     }
