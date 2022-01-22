@@ -6,4 +6,5 @@ https://discord.gg/UznuRAvUpv
 | Version | State              | Warning              |
 | ------- | ------------------ | -------------------- |
 | <1.1.0  | Unstable           | :stop_sign:          |
-| 1.1.0   | Stable             | :green_circle:       |
+| 1.1.0   | Node Vulnerability | :warning:            |
+| 1.1.1   | Stable             | :green_circle:       |
