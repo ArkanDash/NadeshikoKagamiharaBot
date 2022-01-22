@@ -6,35 +6,22 @@ const profileSchema = new mongoose.Schema(
         //User Data
         userID: {type: String, required: true, unique:true},
         money: {type: Number, default: 2500},
-        //Camp Area
-        camps: {type: Object, default: {
-            yourCamp: 0,
-            allCamp: [
-                "Danau Motosu",
-                "Perkemahan Kōan",
-                "Perkemahan Fumotoppara",
-                "Dataran Tinggi Takabocchi",
-                "Danau Shibire",
-                "Jukaino Bokujou",
-                "Gunung Fuji"  
-            ],
-            campCost: [
-                5000,
-                25000,
-                50000,
-                250000,
-                750000,
-                1500000
-            ]
-        }},
+        sleep: {type: Boolean, default: false},
+        camp: {type: Number, default: 0},
+
         //Food
         foods: {type: Object, default: {
-            curryNoodles: 2,
             friedSoftBoiledEgg:0,
+            cookie:5,
+            smore:0,
+            shimarinDango:0,
+            mochi:0,
+            curryNoodles: 2,
             beetAndBeefBorscht:0,
             soupPasta: 0,
             yakiton: 0,
-            gyozaNabe: 0
+            gyozaNabe: 0,
+            sukiyaki: 0
         }},
 
         //Items
@@ -52,6 +39,9 @@ const profileSchema = new mongoose.Schema(
         dailyCooldown: {type: Date, default: new Date(2018, 11)},
         collectCooldown: {type: Date, default: new Date(2018, 11)},
         campCooldown: {type: Date, default: new Date(2018, 11)},
+        workCooldown: {type: Date, default: new Date(2018, 11)},
+        sleepCooldown: {type: Date, default: new Date(2018, 11)},
+        wakeCooldown: {type: Date, default: new Date(2018, 11)},
 
         //User Customization
         bannerImage: {type: String, default: ""},

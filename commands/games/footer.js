@@ -19,6 +19,14 @@ const command = {
             int.reply({embeds:[embed]})
             return
         }
+
+        if(profileData.sleep){
+            const embed = new MessageEmbed()
+            .setDescription(`Kamu sedang tidur!`)
+            .setColor("#FF0000")
+            msg.channel.send({embeds:[embed]})
+            return
+        }
         
         if(imageLink.indexOf("http://") == 0 || imageLink.indexOf("https://") == 0) {
             let userID = int.user.id

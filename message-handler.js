@@ -1,5 +1,6 @@
 import { MessageEmbed } from 'discord.js'
 
+const character = new Array("character", "char")
 const prefix = "."
 
 export default function messageHandler(client) {
@@ -15,30 +16,21 @@ export default function messageHandler(client) {
         else if(command == "help"){
             client.commands.get('help').execute(msg, client);
         }
-        else if(command == "me"){
-            client.commands.get('info-me').execute(msg, client)
+        else if(character.includes(command)){
+            client.commands.get('info-character').execute(msg, client)
         }
         else if(command == "welcometest" && msg.channel.id == "926734032937578517"){
             client.commands.get('welcome-image').execute(msg, client)
         }
     })
 
-    /*client.on("messageCreate", async msg =>{
-        const haramWords = ["hentai","nhentai","nekopoi","bokep","kontol","titit","titid","tytyd","tytyt","mengontol","gontol","ngocok","goblok","geblek","bangsat", "porn", "memek", "jancok", "ngentot", "entot", "ngewe", "nigga", "gay", "sex"]
-        if(msg.content){
-            if(msg.author.id == "844617532517777409") return
-            for (var i = 0; i < haramWords.length; i++) {
-                if (msg.content.toLowerCase().includes(haramWords[i])) {
-                    client.commands.get('warn-user').execute(msg, client)
-                    break;
-                }
-            }
-        }
-    })*/
-
     client.on('guildMemberAdd', async member =>{
         //Send a message if user is join
-        client.commands.get('welcome-image').execute(member, client)
+        const channelJoinID = '783343899996323911'
+        const message = `Selamat datang <${member.id}>, semoga betah disini ya ⛺!`
+        
+        const channel = member.guild.channels.cache.get(channelJoinID)
+        channel.send(message);
     })
 
     client.on('guildMemberRemove', async member =>{

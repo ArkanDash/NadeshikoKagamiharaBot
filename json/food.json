@@ -1,8 +1,13 @@
 {
-    "curryNoodles": 2,
     "friedSoftBoiledEgg":0,
+    "cookie":5,
+    "smore":0,
+    "shimarinDango":0,
+    "mochi":0,
+    "curryNoodles": 2,
     "beetAndBeefBorscht":0,
     "soupPasta": 0,
     "yakiton": 0,
-    "gyozaNabe": 0
+    "gyozaNabe": 0,
+    "sukiyaki": 0
 }

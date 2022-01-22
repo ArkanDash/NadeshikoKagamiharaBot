@@ -18,13 +18,21 @@ const command = {
             .setDescription("Pengguna baru?\nKetik `.profile` untuk mendaftarkan akun kamu")
             .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
+            return
         }
-        else{
+
+        if(profileData.sleep){
             const embed = new MessageEmbed()
-            .setDescription(`Total uang kamu ${profileData.money} yen`)
-            .setColor("#800080")
+            .setDescription(`Kamu sedang tidur!`)
+            .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
+            return
         }
+
+        const embed = new MessageEmbed()
+        .setDescription(`Total uang kamu ${profileData.money} yen`)
+        .setColor("#800080")
+        msg.channel.send({embeds:[embed]})
     }
 }
 

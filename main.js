@@ -58,6 +58,7 @@ client.on('ready', async () => {
 
     messageHandler(client);
     gameHandler(client);
+    //'client.commands.get('bar').execute(client)
 });
 
 //                       \\
@@ -75,7 +76,7 @@ client.on("ready", async () => {
     else {
         slashCmd = client.application.commands;
     }
-    
+
     slashCmd.create({
         name:'custom-status',
         description:'Custom Status',

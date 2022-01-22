@@ -20,8 +20,16 @@ const command = {
             .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
         }
+        
+        if(profileData.sleep){
+            const embed = new MessageEmbed()
+            .setDescription(`Kamu sedang tidur!`)
+            .setColor("#FF0000")
+            msg.channel.send({embeds:[embed]})
+            return
+        }
         else{
-            const then = new Date(profileData.collectCooldown).getTime()
+            const then = new Date(profileData.collectCooldown).getTime() || new Date(2018, 11)
             const now = new Date().getTime()
 
             let timeout = 1000 * 60 * 5
@@ -35,7 +43,8 @@ const command = {
             }
             else{
                 const embed = new MessageEmbed()
-                let collection = collectCalculation(profileData.camps.yourCamp)
+                let yourCamp = profileData.camp
+                let collection = collectCalculation(profileData.camp)
                 let pc = profileData.items.pinecone  += collection[0]
                 let woodStick = profileData.items.stick  += collection[1]
                 let woodLog = profileData.items.wood += collection[2]
@@ -49,11 +58,11 @@ const command = {
                 }
                 await userProfile.findOneAndUpdate({userID:id}, object, {new:true})
                 
-                if(collection[2] == 0){
-                    embed.setDescription(`Kamu mengumpulkan:\n<:yc_pinecone:927725824881336350> x${collection[0]}\n<stick> ${collection[1]}x\n:wood: ${collection[2]}x`)
+                if(yourCamp > 0){
+                    embed.setDescription(`Kamu mengumpulkan:\n<:yc_pinecone:927725824881336350> x${collection[0]}\n<:yc_stick:933994005048479765> ${collection[1]}x\n:wood: ${collection[2]}x`)
                 }
                 else{
-                    embed.setDescription(`Kamu mengumpulkan:\n<:yc_pinecone:927725824881336350> x${collection[0]}\n<stick> ${collection[1]}x`)
+                    embed.setDescription(`Kamu mengumpulkan:\n<:yc_pinecone:927725824881336350> x${collection[0]}\n<:yc_stick:933994005048479765> ${collection[1]}x`)
                 }
                 embed.setColor("#00FF00")
                 msg.channel.send({embeds:[embed]})
@@ -96,6 +105,11 @@ function collectCalculation(id){
         pineCone = Math.floor(Math.random() * 70) + 1
         woodStick = Math.floor(Math.random() * 43) + 1
         woodLog = Math.floor(Math.random() * 25) + 1
+    }
+    else if(id == 6){
+        pineCone = Math.floor(Math.random() * 90) + 1
+        woodStick = Math.floor(Math.random() * 65) + 1
+        woodLog = Math.floor(Math.random() * 35) + 1
     }
     return [pineCone, woodStick, woodLog]
 }

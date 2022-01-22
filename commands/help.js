@@ -9,11 +9,11 @@ const command = {
         .addFields(
             {
                 name: "General Command",
-                value: "**.me**: Saya."
+                value: "**.character**: List karakter di anime yuru camp."
             },
             {
                 name: "Game",
-                value: "**.profile**: Buat profile game/cek profile\n**.collect**: Mengumpulkan item.\n**.daily**: Hadiah Harian\n**.balance**: Check uang\n**.shop**: Zebra Supermarket\n**.sell**: Jual item\n**.eat**: Makan makanan\n**.burn**: Membakar bahan bakar untuk api unggun\n**.camp**: Upgrade Camp"
+                value: "**.profile**: Buat profile game/cek profile\n**.collect**: Mengumpulkan item.\n**.daily**: Hadiah harian\n**.balance**: Check uang\n**.shop**: Zebra Supermarket\n**.buy**: Membeli makanan di zebra supermarket\n**.sell**: Jual item\n**.eat**: Makan makanan\n**.burn**: Membakar bahan bakar untuk api unggun\n**.camp**: Upgrade kamp\n**.work**: Bekerja untuk mendapatkan uang\n**.sleep**: Tidur\n**.wake**: Bangun dari tidur"
             }
         )
         .setColor("#FFFF00")

@@ -24,6 +24,14 @@ const command = {
             return
         }
 
+        if(profileData.sleep){
+            const embed = new MessageEmbed()
+            .setDescription(`Kamu sedang tidur!`)
+            .setColor("#FF0000")
+            msg.channel.send({embeds:[embed]})
+            return
+        }
+
         if(!item){
             const embed = new MessageEmbed()
             .setTitle("Jual Item")
@@ -126,19 +134,19 @@ async function itemSell(msg, item, totalItem){
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
                 sendMessage(sellMsg, totalPrice)
             }
-            else if(item == "stick" && yourWoodStick >= totalItem){
+            else if(item == "stick" && yourStick >= totalItem){
                 const object = {
                     money: yourMoney + totalPrice,
                     items: {
                         pinecone: yourPinecone,
-                        stick: yourStick,
-                        wood: yourWood - totalItem,
+                        stick: yourStick - totalItem,
+                        wood: yourWood,
                     }
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
                 sendMessage(sellMsg, totalPrice)
             }
-            else if(item == "wood" && yourWoodLog >= totalItem){
+            else if(item == "wood" && yourWood >= totalItem){
                 const object = {
                     money: yourMoney + totalPrice,
                     items: {

@@ -23,6 +23,14 @@ const command = {
             msg.channel.send({embeds:[embed]})
             return
         }
+        
+        if(profileData.sleep){
+            const embed = new MessageEmbed()
+            .setDescription(`Kamu sedang tidur!`)
+            .setColor("#FF0000")
+            msg.channel.send({embeds:[embed]})
+            return
+        }
 
         if(!item){
             const embed = new MessageEmbed()
@@ -72,16 +80,17 @@ async function itemSell(msg, item, totalItem){
     let namaItem = item.charAt(0).toUpperCase() + item.slice(1);
     let campFireDuration;
     if(item == "pinecone"){
-        campFireDuration = 15
+        campFireDuration = 3
     }
     else if(item == "stick"){
-        campFireDuration = 50
+        campFireDuration = 10
     }
     else if(item == "wood"){
-        campFireDuration = 125
+        campFireDuration = 35
     }
+    const totalMoney = campFireDuration * totalItem
     const embed = new MessageEmbed()
-    .setDescription(`Apakah kamu ingin membakar **${totalItem} ${namaItem}**?\n<a:yc_campfire:927127127244017675> +${campFireDuration}`)
+    .setDescription(`Apakah kamu ingin membakar **${totalItem} ${namaItem}**?\n<a:yc_campfire:927127127244017675> +${totalMoney}`)
     .setColor("#FF0000")
     let sellMsg = await msg.channel.send({embeds:[embed]})
     sellMsg.react("✅")
@@ -120,7 +129,7 @@ async function itemSell(msg, item, totalItem){
             let yourWood = profileData.items.wood
             let oldCampFire = profileData.campFire
             if(item == "pinecone" && yourPinecone >= totalItem){
-                let newCampFire = oldCampFire + campFireDuration;
+                let newCampFire = oldCampFire + totalMoney;
                 if(newCampFire >= 100){
                     newCampFire = 100
                 }
@@ -134,10 +143,10 @@ async function itemSell(msg, item, totalItem){
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
 
-                sendMessage(sellMsg, campFireDuration, item, totalItem)
+                sendMessage(sellMsg, totalMoney, item, totalItem)
             }
             else if(item == "stick" && yourStick >= totalItem){
-                let newCampFire = oldCampFire + campFireDuration;
+                let newCampFire = oldCampFire + totalMoney;
                 if(newCampFire >= 100){
                     newCampFire = 100
                 }
@@ -151,10 +160,10 @@ async function itemSell(msg, item, totalItem){
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
 
-                sendMessage(sellMsg, campFireDuration, item, totalItem)
+                sendMessage(sellMsg, totalMoney, item, totalItem)
             }
             else if(item == "wood" && yourWood >= totalItem){
-                let newCampFire = oldCampFire + campFireDuration;
+                let newCampFire = oldCampFire + totalMoney;
                 if(newCampFire >= 100){
                     newCampFire = 100
                 }
@@ -168,7 +177,7 @@ async function itemSell(msg, item, totalItem){
                 }
                 await userProfile.findOneAndUpdate({userID: msg.author.id}, object, {new: true})
 
-                sendMessage(sellMsg, campFireDuration, item, totalItem)
+                sendMessage(sellMsg, totalMoney, item, totalItem)
             }
             else{
                 const embed = new MessageEmbed()
@@ -188,10 +197,10 @@ async function itemSell(msg, item, totalItem){
     })
 }
 
-async function sendMessage(sellMsg, campFireDuration, item, totalItem){
+async function sendMessage(sellMsg, totalMoney, item, totalItem){
 
     const embed = new MessageEmbed()
-    .setDescription(`Kamu membakar ${totalItem} ${item}\n<a:yc_campfire:927127127244017675> +${campFireDuration}`)
+    .setDescription(`Kamu membakar ${totalItem} ${item}\n<a:yc_campfire:927127127244017675> +${totalMoney}`)
     .setColor("#00FF00")
     sellMsg.edit({embeds:[embed]})
 }

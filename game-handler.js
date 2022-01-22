@@ -4,22 +4,24 @@ const prefix = "."
 
 const profileAlt = new Array("profile", "pr", "p")
 const campAlt = new Array("camp", "cp")
-const collectAlt = new Array("collect","clt","col","c")
+const collectAlt = new Array("collect", "col", "c")
 const eatAlt = new Array("eat","e")
-const balanceAlt = new Array("balance", "bal", "b")
-const shopAlt = new Array("shop", "s")
+const balanceAlt = new Array("balance", "bal")
+
+const shopAlt = new Array("shop")
+const buyAlt = new Array("buy", "b")
+
 const dailyAlt = new Array("daily", "d")
-const sellAlt = new Array("sell")
+const sellAlt = new Array("sell", "s")
 const burnAlt = new Array("burn", "br")
+const sleepAlt = new Array("sleep", "sp")
+const wakeAlt = new Array("wake", "wk")
+const workAlt = new Array("work", "w")
 
 export default function gameHandler(client){
-    client.on('ready', async () =>{
-        client.commands.get('bar').execute(client)
-    })
-
     client.on("messageCreate", async msg =>{
         if(msg.author.bot) return;
-        if(["932907896428199966", "927118007564640289"].includes(msg.channel.id)) return;
+        if(msg.channel.id != "927118007564640289") return;
         if(msg.content.toLowerCase().indexOf(prefix) !== 0) return;
         
         const args = msg.content.slice(prefix.length).trim().split(/ +/g);
@@ -42,7 +44,10 @@ export default function gameHandler(client){
                 client.commands.get('balance-game').execute(msg, client)
             }
             else if(shopAlt.includes(command)){
-                client.commands.get('shop-game').execute(msg, args[0], args[1], client)
+                client.commands.get('shop-game').execute(msg, client)
+            }
+            else if(buyAlt.includes(command)){
+                client.commands.get('buy-game').execute(msg, args[0], args[1], client)
             }
             else if(dailyAlt.includes(command)){
                 client.commands.get('daily-game').execute(msg, client)
@@ -52,6 +57,15 @@ export default function gameHandler(client){
             }
             else if(burnAlt.includes(command)){
                 client.commands.get('burn-game').execute(msg, args[0], args[1], client)
+            }
+            else if(sleepAlt.includes(command)){
+                client.commands.get('sleep-game').execute(msg, client)
+            }
+            else if(wakeAlt.includes(command)){
+                client.commands.get('wake-game').execute(msg, client)
+            }
+            else if(workAlt.includes(command)){
+                client.commands.get('work-game').execute(msg, client)
             }
             else if(command === "test"){
                 client.commands.get('test').execute(msg, client)

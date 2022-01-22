@@ -20,45 +20,53 @@ const command = {
             .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
         }
-        else{
-            const then = new Date(profileData.dailyCooldown).getTime()
-            const now = new Date().getTime()
 
-            const timeout = 1000 * 60 * 60 * 24
-
-            if(timeout - (now - then) > 0){
-                const timeLeft = ms(timeout - (now - then))
-                const embed = new MessageEmbed()
-                .setDescription(`Kamu sudah mengklaim hadiah hari ini!\nTunggu **${timeLeft.hours} jam ${timeLeft.minutes} menit** sebelum mengunakan command ini!`)
-                .setColor("#FF0000")
-                msg.channel.send({embeds:[embed]})
-                return
-            }
-            let reward = dailyCalculation(profileData.camps.yourCamp)
-            let money = profileData.money += reward[0]
-            let pc = profileData.items.pinecone  += reward[1]
-            let woodStick = profileData.items.stick  += reward[2]
-            let woodLog = profileData.items.wood += reward[3]
-            const object = { 
-                money: money,
-                items: {
-                    pinecone: pc,
-                    stick: woodStick,
-                    wood: woodLog || 0
-                },
-                dailyCooldown: new Date()
-            }
-            await userProfile.findOneAndUpdate({userID:id}, object,{ new: true})
+        if(profileData.sleep){
             const embed = new MessageEmbed()
-            if(reward[3] == 0){
-                embed.setDescription(`Kamu menerima hadiah berupa:\n💴 +${reward[0]}\n<:yc_pinecone:927725824881336350> x${reward[1]}\n<stick> ${reward[2]}x\n:wood: ${reward[3]}x`)
-            }
-            else{
-                embed.setDescription(`Kamu menerima hadiah berupa:\n💴 +${reward[0]}\n<:yc_pinecone:927725824881336350> x${reward[1]}\n<stick> ${reward[2]}x`)
-            }
-            embed.setColor("#00FF00")
+            .setDescription(`Kamu sedang tidur!`)
+            .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
+            return
         }
+
+        const then = new Date(profileData.dailyCooldown).getTime() || new Date(2018, 11)
+        const now = new Date().getTime()
+
+        const timeout = 1000 * 60 * 60 * 24
+
+        if(timeout - (now - then) > 0){
+            const timeLeft = ms(timeout - (now - then))
+            const embed = new MessageEmbed()
+            .setDescription(`Kamu sudah mengklaim hadiah hari ini!\nTunggu **${timeLeft.hours} jam ${timeLeft.minutes} menit** sebelum mengunakan command ini!`)
+            .setColor("#FF0000")
+            msg.channel.send({embeds:[embed]})
+            return
+        }
+        let yourCamp = profileData.camp
+        let reward = dailyCalculation(profileData.camp)
+        let money = profileData.money += reward[0]
+        let pc = profileData.items.pinecone  += reward[1]
+        let woodStick = profileData.items.stick  += reward[2]
+        let woodLog = profileData.items.wood += reward[3]
+        const object = { 
+            money: money,
+            items: {
+                pinecone: pc,
+                stick: woodStick,
+                wood: woodLog || 0
+            },
+            dailyCooldown: new Date()
+        }
+        await userProfile.findOneAndUpdate({userID:id}, object,{ new: true})
+        const embed = new MessageEmbed()
+        if(yourCamp > 0){
+            embed.setDescription(`Kamu menerima hadiah berupa:\n💴 +${reward[0]}\n<:yc_pinecone:927725824881336350> x${reward[1]}\n<:yc_stick:933994005048479765> ${reward[2]}x\n:wood: ${reward[3]}x`)
+        }
+        else{
+            embed.setDescription(`Kamu menerima hadiah berupa:\n💴 +${reward[0]}\n<:yc_pinecone:927725824881336350> x${reward[1]}\n<:yc_stick:933994005048479765> ${reward[2]}x`)
+        }
+        embed.setColor("#00FF00")
+        msg.channel.send({embeds:[embed]})
     }
 }
 
