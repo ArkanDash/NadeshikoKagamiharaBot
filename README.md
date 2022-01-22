@@ -1,6 +1,6 @@
 # NadeshikoKagamiharaBot
 
-This is private project for LHNTRX Camp Discord Server bot.
+This is project for LHNTRX Camp Discord Server bot.
 https://discord.gg/UznuRAvUpv
 
 | Version | State              | Warning              |
