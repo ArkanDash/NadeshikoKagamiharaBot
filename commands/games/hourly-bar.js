@@ -21,7 +21,8 @@ const command = {
             for(let i = 0; i < data.length; i++){
                 let userIDCheck = data[i].userID
                 let user = await userProfile.findOne({ userIDCheck });
-                if(user.hunger <= 0 || user.sleep) return
+                if(user.hunger <= 0) return
+                if(user.sleep == true) return
                 await findUserAndUpdateFood(userIDCheck, user)
             }
         })

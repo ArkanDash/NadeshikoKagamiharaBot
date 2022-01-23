@@ -27,7 +27,7 @@ export default function messageHandler(client) {
     client.on('guildMemberAdd', async member =>{
         //Send a message if user is join
         const channelJoinID = '783343899996323911'
-        const message = `Selamat datang <${member.id}>, semoga betah disini ya ⛺!`
+        const message = `Selamat datang <@${member.id}>, semoga betah disini ya ⛺!`
         
         const channel = member.guild.channels.cache.get(channelJoinID)
         channel.send(message);

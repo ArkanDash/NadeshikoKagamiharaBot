@@ -25,7 +25,7 @@ const command = {
             const then = new Date(profileData.sleepCooldown).getTime()
             const now = new Date().getTime()
 
-            const timeout = 1000 * 60 * 60 * 10
+            const timeout = 1000 * 60 * 60 * 8
 
             if(timeout - (now - then) > 0){
                 const timeLeft = ms(timeout - (now - then))
