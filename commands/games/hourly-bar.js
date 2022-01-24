@@ -9,21 +9,29 @@ const command = {
         let data = await userProfile.find({})
         cron.schedule('*/30 * * * *', async () => {
             //Setiap 2 Jam
+            console.log("reducing campfire...")
+            //IF NEEDED TO CHECK
+            //client.channels.cache.get("<Text Channel ID>").send("Campfire has been reduced.");
             for(let i = 0; i < data.length; i++){
                 let userIDCheck = data[i].userID
                 let user = await userProfile.findOne({ userIDCheck });
                 if(user.campFire <= 0) return
                 await findUserAndUpdateCampfire(userIDCheck, user)
+                
             }
         });
-        cron.schedule('0 */3 * * *', async () =>{
+        cron.schedule('0 */1 * * *', async () =>{
             //Setiap 3 Jam
+            console.log("reducing hunger...")
+            //IF NEEDED TO CHECK
+            //client.channels.cache.get("<Text Channel ID>").send("Hunger has been reduced.");
             for(let i = 0; i < data.length; i++){
                 let userIDCheck = data[i].userID
                 let user = await userProfile.findOne({ userIDCheck });
                 if(user.hunger <= 0) return
                 if(user.sleep == true) return
                 await findUserAndUpdateFood(userIDCheck, user)
+                
             }
         })
     }
@@ -32,7 +40,7 @@ const command = {
 export default command;
 
 async function findUserAndUpdateCampfire(userID, user){
-    let campfireDecrease = await rndInt(5, 15)
+    let campfireDecrease = await rndInt(7, 12)
     let object;
     if(user.campFire < campfireDecrease){
         object = {
@@ -50,15 +58,15 @@ async function findUserAndUpdateCampfire(userID, user){
 }
 
 async function findUserAndUpdateFood(userID, user){
-    let hungerDecrease = await rndInt(10, 25)
+    let hungerDecrease = await rndInt(7, 20)
     let object
     if(user.hunger < hungerDecrease){
-        let object = {
+        object = {
             hunger: 0
         }
     }
     else{
-        let object = {
+        object = {
             hunger: user.hunger - hungerDecrease
         }
     }

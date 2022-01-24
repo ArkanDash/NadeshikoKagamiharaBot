@@ -28,7 +28,6 @@ client.commands = new Collection();
 
 const commandFiles = (await fs.promises.readdir('./commands/')).filter(file => file.endsWith('.js'))
 const gamesFiles = (await fs.promises.readdir('./commands/games')).filter(file => file.endsWith('.js'))
-const testFiles = (await fs.promises.readdir('./commands/test-update')).filter(file => file.endsWith('.js'))
 
 for(const file of commandFiles){
     let src = resolve(resolve(), `./commands/${file}`);
@@ -42,13 +41,6 @@ for(const file of gamesFiles){
     const { default: commandGame } = await import(src); 
     client.commands.set(commandGame.name, commandGame);
 }
-for(const file of testFiles){
-    let src = resolve(resolve(), `./commands/test-update/${file}`);
-    src = type() === 'Windows_NT' ? `file://${src}` : src;
-    const { default: commandGame } = await import(src); 
-    client.commands.set(commandGame.name, commandGame);
-}
-
 
 client.on('ready', async () => {
     console.log(`Logged in as ${client.user.tag}!`);

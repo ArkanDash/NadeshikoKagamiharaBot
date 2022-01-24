@@ -129,7 +129,7 @@ async function upgradeCamp(id){
     }
     else if(id == 2){
         newCamp = "Dataran Tinggi Takabocchi"
-        cost = 50000
+        cost = 75000
         newId = 3
     }
     else if(id == 3){
