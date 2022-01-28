@@ -11,11 +11,15 @@ https://discord.gg/UznuRAvUpv
 
 | Version | State                          | Warning              |
 | ------- | ------------------------------ | -------------------- |
-| <1.1.4  | Unstable                       | :stop_sign:          |
-| 1.1.4   | Stable                         | :green_circle:       |
+| <1.2.1  | Unstable                       | :stop_sign:          |
+| 1.2.1   | Stable                         | :green_circle:       |
 
-## Version 1.1.4
-- Added remove account.
+## Version 1.2.0
+- Added remove account command.
 - Added collection.
 - More profile information such as user cooldown, user collection.
 - **Change Language to English**
+
+## Version 1.2.1
+- Fix remove command.
+- Fix readme.

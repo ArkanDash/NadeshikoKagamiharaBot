@@ -17,6 +17,7 @@ const burnAlt = new Array("burn", "br")
 const sleepAlt = new Array("sleep", "sp")
 const wakeAlt = new Array("wake", "wk")
 const workAlt = new Array("work", "w")
+const deleteAlt = new Array("delete", "remove")
 
 export default function gameHandler(client){
     client.on("messageCreate", async msg =>{
