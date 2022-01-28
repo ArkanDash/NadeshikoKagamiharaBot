@@ -50,7 +50,7 @@ client.on('ready', async () => {
 
     messageHandler(client);
     gameHandler(client);
-    //'client.commands.get('bar').execute(client)
+    client.commands.get('bar').execute(client)
 });
 
 //                       \\
@@ -156,4 +156,4 @@ client.on("interactionCreate", async interaction =>{
     }
 })
 
-client.login(process.env.TOKEN);
+client.login(process.env.TOKEN_RIN_SHIMA);

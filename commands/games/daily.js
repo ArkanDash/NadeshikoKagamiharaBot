@@ -16,14 +16,15 @@ const command = {
         }
         if(!profileData){
             const embed = new MessageEmbed()
-            .setDescription("Pengguna baru?\nKetik `.profile` untuk mendaftarkan akun kamu")
+            .setDescription("New user?\nType `.profile` to register your account")
             .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
+            return
         }
 
         if(profileData.sleep){
             const embed = new MessageEmbed()
-            .setDescription(`Kamu sedang tidur!`)
+            .setDescription(`You are sleeping!`)
             .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
             return
@@ -37,7 +38,7 @@ const command = {
         if(timeout - (now - then) > 0){
             const timeLeft = ms(timeout - (now - then))
             const embed = new MessageEmbed()
-            .setDescription(`Kamu sudah mengklaim hadiah hari ini!\nTunggu **${timeLeft.hours} jam ${timeLeft.minutes} menit** sebelum mengunakan command ini!`)
+            .setDescription(`You've already claimed today's reward!\nPlease wait **${timeLeft.hours} hour ${timeLeft.minutes} minute** before using this command!`)
             .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
             return
@@ -60,10 +61,10 @@ const command = {
         await userProfile.findOneAndUpdate({userID:id}, object,{ new: true})
         const embed = new MessageEmbed()
         if(yourCamp > 0){
-            embed.setDescription(`Kamu menerima hadiah berupa:\n💴 +${reward[0]}\n<:yc_pinecone:927725824881336350> x${reward[1]}\n<:yc_stick:933994005048479765> ${reward[2]}x\n:wood: ${reward[3]}x`)
+            embed.setDescription(`You have received:\n💴 +${reward[0]}\n<:yc_pinecone:927725824881336350> x${reward[1]}\n<:yc_stick:933994005048479765> ${reward[2]}x\n:wood: ${reward[3]}x`)
         }
         else{
-            embed.setDescription(`Kamu menerima hadiah berupa:\n💴 +${reward[0]}\n<:yc_pinecone:927725824881336350> x${reward[1]}\n<:yc_stick:933994005048479765> ${reward[2]}x`)
+            embed.setDescription(`You have received:\n💴 +${reward[0]}\n<:yc_pinecone:927725824881336350> x${reward[1]}\n<:yc_stick:933994005048479765> ${reward[2]}x`)
         }
         embed.setColor("#00FF00")
         msg.channel.send({embeds:[embed]})
@@ -111,6 +112,12 @@ function dailyCalculation(id){
         pineCone = rndInt(61, 125)
         woodStick = rndInt(43, 76)
         woodLog = rndInt(36, 54)
+    }
+    else if(id == 6){
+        money = rndInt(25000, 50000)
+        pineCone = rndInt(100, 300)
+        woodStick = rndInt(75, 100)
+        woodLog = rndInt(50, 100)
     }
     return [money ,pineCone, woodStick, woodLog]
 }

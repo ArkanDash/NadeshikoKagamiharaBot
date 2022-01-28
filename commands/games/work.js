@@ -23,7 +23,7 @@ const command = {
         
         if(profileData.sleep){
             const embed = new MessageEmbed()
-            .setDescription(`Kamu sedang tidur!`)
+            .setDescription(`You are sleeping!`)
             .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
             return
@@ -36,7 +36,7 @@ const command = {
             if(timeout - (now - then) > 0){
                 let timeLeft = ms(timeout - (now - then))
                 const embed = new MessageEmbed()
-                .setDescription(`Tunggu **${timeLeft.minutes} menit ${timeLeft.seconds} detik** sebelum menggunakan command ini!`)
+                .setDescription(`Please wait **${timeLeft.minutes} minute ${timeLeft.seconds} second** before using this command!`)
                 .setColor("#FF0000")
                 msg.channel.send({embeds:[embed]})
                 return
@@ -52,7 +52,7 @@ const command = {
                 }
                 await userProfile.findOneAndUpdate({userID:id}, object, {new:true})
                 
-                embed.setDescription(`Kamu bekerja sebagai ${work[1]}.\n+💴 ${work[0]}`)
+                embed.setDescription(`You work as ${work[1]}.\n+💴 ${work[0]}`)
                 embed.setColor("#00FF00")
                 msg.channel.send({embeds:[embed]})
             }
@@ -67,19 +67,19 @@ function workWages(id){
     let job;
     if(id == 0){
         wages = rndInt(100, 500)
-        job = "Kasir Toko Kecil"
+        job = "Small Shop Cashier"
     }
     else if(id == 1){
         wages = rndInt(500, 1500)
-        job = "Kasir Supermarket"
+        job = "Supermarket Cashier"
     }
     else if(id == 2){
         wages = rndInt(3000, 5000)
-        job = "Pengirim Surat"
+        job = "Mail Sender"
     }
     else if(id == 3){
         wages = rndInt(5000, 10000)
-        job = "Manajer Toko Buku"
+        job = "Bookstore Manager"
     }
     else if(id == 4){
         wages = rndInt(10000, 15000)
@@ -87,11 +87,11 @@ function workWages(id){
     }
     else if(id == 5){
         wages = rndInt(20000, 30000)
-        job = "Manager Bisnis"
+        job = "Restaurant Waiter"
     }
-    else if(id == 5){
-        wages = rndInt(30000, 50000)
-        job = "NFT"
+    else if(id == 6){
+        wages = rndInt(30000, 75000)
+        job = "Business Manager"
     }
     return [wages, job]
 }

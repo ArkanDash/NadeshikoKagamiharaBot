@@ -1,6 +1,6 @@
 import { Client } from "discord.js"
 
-const prefix = "."
+const prefix = ","
 
 const profileAlt = new Array("profile", "pr", "p")
 const campAlt = new Array("camp", "cp")
@@ -29,7 +29,7 @@ export default function gameHandler(client){
 
         try{
             if(profileAlt.includes(command)){
-                client.commands.get('profile-game').execute(msg, client)
+                client.commands.get('profile-game').execute(msg, args[0], client)
             }
             else if(campAlt.includes(command)){
                 client.commands.get('camp-game').execute(msg, client)
@@ -67,8 +67,8 @@ export default function gameHandler(client){
             else if(workAlt.includes(command)){
                 client.commands.get('work-game').execute(msg, client)
             }
-            else if(command === "test"){
-                client.commands.get('test').execute(msg, client)
+            else if(deleteAlt.includes(command)){
+                client.commands.get('delete-game').execute(msg, client)
             }
         }
         catch(e){

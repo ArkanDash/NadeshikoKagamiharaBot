@@ -50,23 +50,23 @@ async function Character(){
     const embed = new MessageEmbed()
     .setTitle("『 __Rin Shima__ 』")
     .setURL("https://yuru-camp.fandom.com/wiki/Rin_Shima")
-    .setDescription("Rin Shima (志摩 , Shima Rin) adalah seorang gadis muda di Yuru Camp△ yang merupakan siswa di SMA Motosu dan suka berkemah, tetapi dia biasanya berkemah sendiri sampai dia bertemu Nadeshiko Kagamihara.")
+    .setDescription("Rin Shima (志摩 リン, Shima Rin) is a young girl in Yuru Camp△ who is a student at Motosu High School and enjoys camping, but she usually camps by herself until she meets Nadeshiko Kagamihara.")
     .setColor("#3A70AD")
     .setImage("https://static.wikia.nocookie.net/yuru-camp/images/d/d6/Rin_character_sheet.png")
     .addFields([
         {
-            name:"Nama Panggilan",
+            name:"Nickname",
             value:"Rin\nShimarin",
             inline:true
         },
         {
-            name:"Ulang Tahun",
-            value:"1 Oktober",
+            name:"Birthday",
+            value:"October 1",
             inline:true
         },
         {
-            name:"Jenis Kelamin",
-            value:"Perempuan",
+            name:"Gender",
+            value:"Female",
             inline:true
         }
     ])
@@ -77,23 +77,23 @@ async function Character(){
     const embed2 = new MessageEmbed()
     .setTitle("『 __Nadeshiko Kagamihara__ 』")
     .setURL("https://yuru-camp.fandom.com/wiki/Nadeshiko_Kagamihara")
-    .setDescription("Nadeshiko Kagamihara (各務原 ) adalah seorang gadis muda yang muncul di Yuru Camp△ sebagai transfer baru-baru ini ke Motosu High School dari Nanbu-ch (kota Nanbu), putri Shūichirō Kagamihara dan Shizuka Kagamihara dan adik perempuan Sakura Kagamihara. Dia sebelumnya tinggal di kota Hamamatsu di pantai selatan prefektur Shizuoka.")
+    .setDescription("Nadeshiko Kagamihara (各務原 なでしこ) is a young girl who appears in Yuru Camp△ as recent transfer to Motosu High School from Nanbu-chō (Nanbu town), the daughter of Shūichirō Kagamihara and Shizuka Kagamihara and the younger sister of Sakura Kagamihara. She previously lived in Hamamatsu city on the the southern coast of Shizuoka prefecture.")
     .setColor("#FB9BC9")
     .setImage("https://static.wikia.nocookie.net/yuru-camp/images/c/cd/Nadeshiko_character_sheet.png")
     .addFields([
         {
-            name:"Nama Panggilan",
+            name:"Nickname",
             value:"Nadeshiko\nFujiko\nMamashiko",
             inline:true
         },
         {
-            name:"Ulang Tahun",
+            name:"Birthday",
             value:"4 Maret",
             inline:true
         },
         {
-            name:"Jenis Kelamin",
-            value:"Perempuan",
+            name:"Gender",
+            value:"Female",
             inline:true
         }
     ])
@@ -104,23 +104,23 @@ async function Character(){
     const embed3 = new MessageEmbed()
     .setTitle("『 __Aoi Inuyama__ 』")
     .setURL("https://yuru-camp.fandom.com/wiki/Aoi_Inuyama")
-    .setDescription("Aoi Inuyama (犬山 Inuyama Aoi) adalah seorang gadis SMA di Yuru Camp△ yang merupakan siswa di SMA Motosu. Dia adalah anggota pendiri The Outdoor Activities Club.")
+    .setDescription("Aoi Inuyama (犬山 あおい Inuyama Aoi) is a high-school girl in Yuru Camp△ who is a student at Motosu High School. She is a founding member of The Outdoor Activities Club.")
     .setColor("#9CE31B")
     .setImage("https://static.wikia.nocookie.net/yuru-camp/images/e/ed/Aoi_character_sheet.png")
     .addFields([
         {
-            name:"Nama Panggilan",
+            name:"Nickname",
             value:"Inuko\nInuko-san",
             inline:true
         },
         {
-            name:"Ulang Tahun",
+            name:"Birthday",
             value:"4 Maret",
             inline:true
         },
         {
-            name:"Jenis Kelamin",
-            value:"Perempuan",
+            name:"Gender",
+            value:"Female",
             inline:true
         }
     ])
@@ -131,23 +131,23 @@ async function Character(){
     const embed4 = new MessageEmbed()
     .setTitle("『 __Chiaki Ōgaki__ 』")
     .setURL("https://yuru-camp.fandom.com/wiki/Chiaki_%C5%8Cgaki")
-    .setDescription("Chiaki gaki (大垣 gaki Chiaki) adalah seorang gadis SMA di Yuru Camp△ yang merupakan siswa di SMA Motosu. Dia adalah anggota pendiri The Outdoor Activities Club.")
+    .setDescription("Chiaki Ōgaki (大垣 千明 Ōgaki Chiaki) is a high-school girl in Yuru Camp△ who is a student at Motosu High School. She is a founding member of The Outdoor Activities Club.")
     .setColor("#C13557")
     .setImage("https://static.wikia.nocookie.net/yuru-camp/images/5/55/Chiaki_character_sheet.png")
     .addFields([
         {
-            name:"Nama Panggilan",
+            name:"Nickname",
             value:"Aki",
             inline:true
         },
         {
-            name:"Ulang Tahun",
+            name:"Birthday",
             value:"31 Agustus",
             inline:true
         },
         {
-            name:"Jenis Kelamin",
-            value:"Perempuan",
+            name:"Gender",
+            value:"Female",
             inline:true
         }
     ])
@@ -158,23 +158,23 @@ async function Character(){
     const embed5 = new MessageEmbed()
     .setTitle("『 __Ena Saitō__ 』")
     .setURL("https://yuru-camp.fandom.com/wiki/Ena_Sait%C5%8D")
-    .setDescription(`Ena Saitō (斉藤 , Saitō Ena) adalah seorang gadis muda di Yuru Camp△ yang merupakan siswa di SMA Motosu dan pertama kali muncul di "Welcome to the Outdoor Activities Club!" sebagai teman Rin.`)
+    .setDescription(`Ena Saitō (斉藤 恵那, Saitō Ena) is a young girl in Yuru Camp△ who is a student at Motosu High School and first appears in "Welcome to the Outdoor Activities Club!" as a friend of Rin.`)
     .setColor("#F98B01")
     .setImage("https://static.wikia.nocookie.net/yuru-camp/images/7/73/Ena_character_sheet.png")
     .addFields([
         {
-            name:"Nama Panggilan",
+            name:"Nickname",
             value:"Ena",
             inline:true
         },
         {
-            name:"Ulang Tahun",
+            name:"Birthday",
             value:"1 September",
             inline:true
         },
         {
-            name:"Jenis Kelamin",
-            value:"Perempuan",
+            name:"Gender",
+            value:"Female",
             inline:true
         }
     ])

@@ -28,8 +28,17 @@ const command = {
             for(let i = 0; i < data.length; i++){
                 let userIDCheck = data[i].userID
                 let user = await userProfile.findOne({ userIDCheck });
-                if(user.hunger <= 0) return
-                if(user.sleep == true) return
+                if(user.sleep){
+                    if(user.hunger <= 30){
+                        return
+                    }
+                    else{
+                        await sleepDecrease(userIDCheck, user)
+                    }
+                }
+                else if(user.hunger <= 0){
+                    return
+                }
                 await findUserAndUpdateFood(userIDCheck, user)
                 
             }
@@ -40,7 +49,7 @@ const command = {
 export default command;
 
 async function findUserAndUpdateCampfire(userID, user){
-    let campfireDecrease = await rndInt(7, 12)
+    let campfireDecrease = await rndInt(5, 10)
     let object;
     if(user.campFire < campfireDecrease){
         object = {
@@ -58,7 +67,7 @@ async function findUserAndUpdateCampfire(userID, user){
 }
 
 async function findUserAndUpdateFood(userID, user){
-    let hungerDecrease = await rndInt(7, 20)
+    let hungerDecrease = await rndInt(5, 15)
     let object
     if(user.hunger < hungerDecrease){
         object = {
@@ -72,6 +81,13 @@ async function findUserAndUpdateFood(userID, user){
     }
     let updateData = await userProfile.findOneAndUpdate({ userID }, object)
     //console.log("id:" + userID, "after update value:"+ object.campFire, "old value:" + updateData.campFire)
+}
+
+async function sleepDecrease(userID, user){
+    let object = {
+        hunger: 30
+    }
+    let updateData = await userProfile.findOneAndUpdate({ userID }, object)
 }
 
 async function rndInt(min, max) {

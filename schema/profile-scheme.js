@@ -31,15 +31,19 @@ const profileSchema = new mongoose.Schema(
             wood: 0
         }},
 
+        collections:{ type: Object, default:{
+            shippeitaro: false
+        }},
+
         //Data Progress
         campFire:{type: Number, default: 80},
         hunger:{type: Number, default: 80},
 
-        //Cooldown Command
-        dailyCooldown: {type: Date, default: new Date(2018, 11)},
+        //Cooldown User
         collectCooldown: {type: Date, default: new Date(2018, 11)},
-        campCooldown: {type: Date, default: new Date(2018, 11)},
         workCooldown: {type: Date, default: new Date(2018, 11)},
+        dailyCooldown: {type: Date, default: new Date(2018, 11)},
+        campCooldown: {type: Date, default: new Date(2018, 11)},
         sleepCooldown: {type: Date, default: new Date(2018, 11)},
         wakeCooldown: {type: Date, default: new Date(2018, 11)},
 

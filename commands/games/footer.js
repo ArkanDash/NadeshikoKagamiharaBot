@@ -14,21 +14,21 @@ const command = {
         }
         if(!profileData){
             const embed = new MessageEmbed()
-            .setDescription("Pengguna baru?\nKetik `.profile` untuk mendaftarkan akun kamu")
+            .setDescription("New user?\nType `.profile` to register your account")
             .setColor("#FF0000")
-            int.reply({embeds:[embed]})
+            msg.channel.send({embeds:[embed]})
             return
         }
 
         if(profileData.sleep){
             const embed = new MessageEmbed()
-            .setDescription(`Kamu sedang tidur!`)
+            .setDescription(`You are sleeping!`)
             .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
             return
         }
         
-        if(imageLink.indexOf("http://") == 0 || imageLink.indexOf("https://") == 0) {
+        if(/\.(jpg|gif|png)$/.test(imageLink)) {
             let userID = int.user.id
             let object = {
                 footerText: footerText,
@@ -36,7 +36,7 @@ const command = {
             }
             await userProfile.findOneAndUpdate({ userID }, object ,{ new: true })
             const embed = new MessageEmbed()
-            .setDescription("Berhasil di set!")
+            .setDescription("Successfully been set!")
             .setColor("#00FF00")
             .setFooter({
                 text: footerText,
@@ -51,7 +51,7 @@ const command = {
             }
             await userProfile.findOneAndUpdate({ userID }, object ,{ new: true })
             const embed = new MessageEmbed()
-            .setDescription("Berhasil di set!")
+            .setDescription("Successfully been set!")
             .setColor("#00FF00")
             .setFooter({
                 text: footerText

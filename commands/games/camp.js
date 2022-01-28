@@ -16,23 +16,24 @@ const command = {
         }
         if(!profileData){
             const embed = new MessageEmbed()
-            .setDescription("Pengguna baru?\nKetik `.profile` untuk mendaftarkan akun kamu")
+            .setDescription("New user?\nType `.profile` to register your account")
             .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
+            return
         }
 
         if(profileData.sleep){
             const embed = new MessageEmbed()
-            .setDescription(`Kamu sedang tidur!`)
+            .setDescription(`You are sleeping!`)
             .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
             return
         }
         else{
             let yourCamp = profileData.camp
-            if(yourCamp > 5){
+            if(yourCamp > 6){
                 const embed = new MessageEmbed()
-                .setDescription("Kamu sudah pindah ke camp yang paling tinggi harganya.")
+                .setDescription("You have already moved to the last campsite.")
                 .setColor("#FF0000")
                 rmsg.edit({embeds:[embed]})
                 return
@@ -40,8 +41,8 @@ const command = {
             
             let newCamp = await upgradeCamp(yourCamp)
             const embed = new MessageEmbed()
-            embed.setDescription(`🏕 Apakah kamu ingin pindah kamping ke ${newCamp[0]}?\n💴 **${newCamp[1]} yen**`)
-            embed.setTitle("Pindah Perkemahan")
+            embed.setDescription(`🏕 Do you want to move your camp to ${newCamp[0]}?\n💴 **${newCamp[1]} yen**`)
+            embed.setTitle("Move Camp")
             embed.setColor("#FFFF00")
             let rmsg = await msg.channel.send({embeds:[embed]})
             await rmsg.react("✅")
@@ -54,7 +55,7 @@ const command = {
             collector.on('end', async (collected) => {
                 if(collected.size == 0){
                     const embed = new MessageEmbed()
-                    .setDescription("Waktu reaksi habis.")
+                    .setDescription("Time has run out to react.")
                     .setColor("#FF0000")
                     rmsg.edit({embeds:[embed]})
                     return
@@ -70,11 +71,11 @@ const command = {
                         const then = new Date(profileData.campCooldown).getTime()
                         const now = new Date().getTime()
 
-                        let timeout = 1000 * 60 * 60 * 12
+                        let timeout = 1000 * 60 * 60 * 24 * 3
                         if(timeout - (now - then) > 0){
                             let timeLeft = ms(timeout - (now - then))
                             const embed = new MessageEmbed()
-                            .setDescription(`**Anda sedang dalam cooldown!**\n**${timeLeft.hours} jam ${timeLeft.minutes} menit**`)
+                            .setDescription(`**You are on cooldown!**\n**${timeLeft.hours} hour ${timeLeft.minutes} minute left**`)
                             .setColor("#FF0000")
                             msg.channel.send({embeds:[embed]})
                             return
@@ -82,7 +83,7 @@ const command = {
 
                         if(yourMoney < newCamp[1]){
                             const embed = new MessageEmbed()
-                            .setDescription("Uang kamu tidak cukup untuk pindah kamp!")
+                            .setDescription("Your money is not enough to move camp!")
                             .setColor("#FF0000")
                             rmsg.edit({embeds:[embed]})
                         }
@@ -96,7 +97,7 @@ const command = {
                             await userProfile.findOneAndUpdate({userID: id}, updateCamp, {new: true})
                         
                             const embed2 = new MessageEmbed()
-                            embed2.setDescription(`Perkemahan kamu sekarang pindah di ${newCamp[0]}`)
+                            embed2.setDescription(`Your camp has now moved to ${newCamp[0]}`)
                             embed2.setColor("#00FF00")
                             rmsg.edit({embeds:[embed2]})
                         }
@@ -104,7 +105,7 @@ const command = {
                 }
                 else if(text == "❌"){
                     const embed = new MessageEmbed()
-                    .setDescription("Dibatalkan")
+                    .setDescription("Canceled")
                     .setColor("#FF0000")
                     rmsg.edit({embeds:[embed]})
                 }
@@ -118,22 +119,22 @@ export default command;
 async function upgradeCamp(id){
     let newCamp, cost, newId;
     if(id == 0){
-        newCamp = "Perkemahan Kōan"
+        newCamp = "Kōan Campsite"
         cost = 5000
         newId = 1
     }
     else if(id == 1){
-        newCamp = "Perkemahan Fumotoppara"
+        newCamp = "Fumotoppara Campsite"
         cost = 25000
         newId = 2
     }
     else if(id == 2){
-        newCamp = "Dataran Tinggi Takabocchi"
+        newCamp = "Takabocchi Highlands"
         cost = 75000
         newId = 3
     }
     else if(id == 3){
-        newCamp = "Danau Shibire"
+        newCamp = "Shibire Lake"
         cost = 250000
         newId = 4
     }
@@ -143,8 +144,8 @@ async function upgradeCamp(id){
         newId = 5
     }
     else if(id == 5){
-        newCamp = "Gunung Fuji"
-        cost = 1500000
+        newCamp = "Lake Yamanaka"
+        cost = 2500000
         newId = 6
     }
     const campUpgrade = [newCamp, cost, newId]

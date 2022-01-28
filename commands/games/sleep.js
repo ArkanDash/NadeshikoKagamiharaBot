@@ -15,7 +15,7 @@ const command = {
         }
         if(!profileData){
             const embed = new MessageEmbed()
-            .setDescription("Pengguna baru?\nKetik `.profile` untuk mendaftarkan akun kamu")
+            .setDescription("New user?\nType `.profile` to register your account")
             .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
             return
@@ -30,7 +30,7 @@ const command = {
             if(timeout - (now - then) > 0){
                 const timeLeft = ms(timeout - (now - then))
                 const embed = new MessageEmbed()
-                .setDescription(`Tunggu **${timeLeft.hours} jam ${timeLeft.minutes} menit** sebelum tidur!`)
+                .setDescription(`You must wait **${timeLeft.hours} hour ${timeLeft.minutes} minute** before sleeping!`)
                 .setColor("#FF0000")
                 msg.channel.send({embeds:[embed]})
             }
@@ -41,7 +41,7 @@ const command = {
                 }
                 await userProfile.findOneAndUpdate({ userID: msg.author.id }, object, { new: true })
                 const embed = new MessageEmbed()
-                .setDescription(`Kamu sekarang tertidur.`)
+                .setDescription(`You are asleep now.`)
                 .setColor("#00FF00")
                 msg.channel.send({embeds:[embed]})
             }
@@ -49,7 +49,7 @@ const command = {
         }
         else{
             const embed = new MessageEmbed()
-            .setDescription(`Kamu sedang tidur!`)
+            .setDescription(`You have already sleeping!`)
             .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
         }

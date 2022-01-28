@@ -18,15 +18,15 @@ const command = {
         }
         if(!profileData){
             const embed = new MessageEmbed()
-            .setDescription("Pengguna baru?\nKetik `.profile` untuk mendaftarkan akun kamu")
+            .setDescription("New user?\nType `.profile` to register your account")
             .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
             return
         }
-        
+
         if(profileData.sleep){
             const embed = new MessageEmbed()
-            .setDescription(`Kamu sedang tidur!`)
+            .setDescription(`You are sleeping!`)
             .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
             return
@@ -34,14 +34,14 @@ const command = {
 
         if(!item){
             const embed = new MessageEmbed()
-            .setTitle("List Bahan Bakar untuk Campfire")
+            .setTitle("List of Fuels for Campfires")
             .addFields(
                 {
-                    name: 'Bahan Bakar',
+                    name: 'Your Fuel',
                     value: `Pinecone x${profileData.items.pinecone}\nWooden Stick x${profileData.items.stick}\nWood Log x${profileData.items.wood}`
                 }
             )
-            .setDescription("List Bahan bakar yang bisa dibakar: \n\nPinecone = <a:yc_campfire:927127127244017675> +3\n`id:pinecone`\n\nStick = <a:yc_campfire:927127127244017675> +10\n`id:stick`\n\nWood = <a:yc_campfire:927127127244017675> +25\n`id:wood`\n\nPastikan nama item yang kamu bakar harus sama dengan id di list.")
+            .setDescription("List of Fuels that can be burned: \n\nPinecone = <a:yc_campfire:927127127244017675> +3\n`id:pinecone`\n\nStick = <a:yc_campfire:927127127244017675> +10\n`id:stick`\n\nWood = <a:yc_campfire:927127127244017675> +25\n`id:wood`")
             .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
             return
@@ -60,7 +60,7 @@ const command = {
         }
         else{
             const embed = new MessageEmbed()
-            .setDescription(`Bahan bakar yang kamu ingin bakar tidak ada atau tidak tersedia.`)
+            .setDescription(`The fuel you want to burn is unavailable.`)
             .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
         }
@@ -90,7 +90,7 @@ async function itemSell(msg, item, totalItem){
     }
     const totalMoney = campFireDuration * totalItem
     const embed = new MessageEmbed()
-    .setDescription(`Apakah kamu ingin membakar **${totalItem} ${namaItem}**?\n<a:yc_campfire:927127127244017675> +${totalMoney}`)
+    .setDescription(`Do you want to burn **${totalItem} ${namaItem}**?\n<a:yc_campfire:927127127244017675> +${totalMoney}`)
     .setColor("#FF0000")
     let sellMsg = await msg.channel.send({embeds:[embed]})
     sellMsg.react("✅")
@@ -111,7 +111,7 @@ async function itemSell(msg, item, totalItem){
     collector.on('end', async (collected) => {
         if(collected.size == 0){
             const embed = new MessageEmbed()
-            .setDescription("Waktu reaksi habis!")
+            .setDescription("Time has run out to react.")
             .setColor("#FF0000")
             sellMsg.edit({embeds:[embed]})
             return
@@ -181,7 +181,7 @@ async function itemSell(msg, item, totalItem){
             }
             else{
                 const embed = new MessageEmbed()
-                .setDescription("Bahan bakar yang kamu punya kurang.")
+                .setDescription("You don't have this fuel!")
                 .setColor("#FF0000")
                 sellMsg.edit({embeds:[embed]})
                 return
@@ -190,7 +190,7 @@ async function itemSell(msg, item, totalItem){
         }
         else if(text == "❌"){
             const embed = new MessageEmbed()
-            .setDescription("Pembakaran bahan bakar dibatalkan")
+            .setDescription("Fuel burning canceled.")
             .setColor("#FF0000")
             sellMsg.edit({embeds:[embed]})
         }
@@ -200,7 +200,7 @@ async function itemSell(msg, item, totalItem){
 async function sendMessage(sellMsg, totalMoney, item, totalItem){
 
     const embed = new MessageEmbed()
-    .setDescription(`Kamu membakar ${totalItem} ${item}\n<a:yc_campfire:927127127244017675> +${totalMoney}`)
+    .setDescription(`You burn ${totalItem} ${item}.\n<a:yc_campfire:927127127244017675> +${totalMoney}`)
     .setColor("#00FF00")
     sellMsg.edit({embeds:[embed]})
 }

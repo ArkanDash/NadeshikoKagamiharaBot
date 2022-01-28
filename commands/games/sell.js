@@ -18,7 +18,7 @@ const command = {
         }
         if(!profileData){
             const embed = new MessageEmbed()
-            .setDescription("Pengguna baru?\nKetik `.profile` untuk mendaftarkan akun kamu")
+            .setDescription("New user?\nType `.profile` to register your account")
             .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
             return
@@ -26,7 +26,7 @@ const command = {
 
         if(profileData.sleep){
             const embed = new MessageEmbed()
-            .setDescription(`Kamu sedang tidur!`)
+            .setDescription(`You are sleeping!`)
             .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
             return
@@ -34,9 +34,9 @@ const command = {
 
         if(!item){
             const embed = new MessageEmbed()
-            .setTitle("Jual Item")
-            .setDescription("List Item\n\nPinecone = 💴 15\n`id:pinecone`\n\nStick = 💴 50\n`id:stick`\n\nWood = 💴 125\n`id:wood`\n\nPastikan nama item yang ingin kamu jual harus sama dengan id di list.")
-            .setColor("#FF0000")
+            .setTitle("Selling Items")
+            .setDescription("List of Item\n\nPinecone = 💴 15\n`id:pinecone`\n\nStick = 💴 50\n`id:stick`\n\nWood = 💴 125\n`id:wood`")
+            .setColor("#800080")
             msg.channel.send({embeds:[embed]})
             return
         }
@@ -54,7 +54,7 @@ const command = {
         }
         else{
             const embed = new MessageEmbed()
-            .setDescription(`Item yang ingin kamu jual tidak ada`)
+            .setDescription(`The item you want to sell doesn't exist.`)
             .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
         }
@@ -84,7 +84,7 @@ async function itemSell(msg, item, totalItem){
     }
     let totalPrice = price * totalItem;
     const embed = new MessageEmbed()
-    .setDescription(`Apakah kamu ingin menjual **${totalItem} ${itemToSell}** dengan harga **💴 ${totalPrice}**\nHarga per item = 💴 ${price}`)
+    .setDescription(`Do you want to sell **${totalItem} ${itemToSell}** for **💴 ${totalPrice}** yen\nPrice per item = 💴 ${price}`)
     .setColor("#FF0000")
     let sellMsg = await msg.channel.send({embeds:[embed]})
     sellMsg.react("✅")
@@ -105,7 +105,7 @@ async function itemSell(msg, item, totalItem){
     collector.on('end', async (collected) => {
         if(collected.size == 0){
             const embed = new MessageEmbed()
-            .setDescription("Penjualan barang dibatalkan")
+            .setDescription("Sale canceled.")
             .setColor("#FF0000")
             sellMsg.edit({embeds:[embed]})
             return
@@ -160,7 +160,7 @@ async function itemSell(msg, item, totalItem){
             }
             else{
                 const embed = new MessageEmbed()
-                .setDescription("Item yang kamu punya kurang\n\nPenjualan barang dibatalkan.")
+                .setDescription("The food you have is empty or lacking\n\nSale canceled.")
                 .setColor("#FF0000")
                 sellMsg.edit({embeds:[embed]})
                 return
@@ -168,7 +168,7 @@ async function itemSell(msg, item, totalItem){
         }
         else if(text == "❌"){
             const embed = new MessageEmbed()
-            .setDescription("Penjualan barang dibatalkan")
+            .setDescription("Sale canceled")
             .setColor("#FF0000")
             sellMsg.edit({embeds:[embed]})
         }
@@ -177,7 +177,7 @@ async function itemSell(msg, item, totalItem){
 
 async function sendMessage(sellMsg, totalPrice){
     const embed = new MessageEmbed()
-    .setDescription(`Barang berhasil di jual!\n💴 +${totalPrice}`)
+    .setDescription(`Item successfully sold!\n💴 +${totalPrice}`)
     .setColor("#00FF00")
     sellMsg.edit({embeds:[embed]})
 }

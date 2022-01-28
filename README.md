@@ -11,13 +11,11 @@ https://discord.gg/UznuRAvUpv
 
 | Version | State                          | Warning              |
 | ------- | ------------------------------ | -------------------- |
-| <1.1.3  | Unstable                       | :stop_sign:          |
-| 1.1.3   | Stable                         | :green_circle:       |
+| <1.1.4  | Unstable                       | :stop_sign:          |
+| 1.1.4   | Stable                         | :green_circle:       |
 
-## Version 1.1.3
-- Hunger now can decrease.
-- Removing GuildMemberAdd and GuildMemberRemove.
-- Camp price for ID 3 is now changed to 75000.
-- Change Status.
-- Removing some files that don't intend to be here.
-- Fix looping issues.
+## Version 1.1.4
+- Added remove account.
+- Added collection.
+- More profile information such as user cooldown, user collection.
+- **Change Language to English**

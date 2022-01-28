@@ -1,1 +1,10 @@
 .env
+welcome.js
+commands/custom-presence.js
+commands/warn-message.js
+commands/send-embed.js
+.gitignore
+multi.js
+multi/
+token.json
+schema/guild-scheme.js

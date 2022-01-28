@@ -12,8 +12,8 @@ const command = {
                 value: "**.character**: List karakter di anime yuru camp."
             },
             {
-                name: "Game",
-                value: "**.profile**: Buat profile game/cek profile\n**.collect**: Mengumpulkan item.\n**.daily**: Hadiah harian\n**.balance**: Check uang\n**.shop**: Zebra Supermarket\n**.buy**: Membeli makanan di zebra supermarket\n**.sell**: Jual item\n**.eat**: Makan makanan\n**.burn**: Membakar bahan bakar untuk api unggun\n**.camp**: Upgrade kamp\n**.work**: Bekerja untuk mendapatkan uang\n**.sleep**: Tidur\n**.wake**: Bangun dari tidur"
+                name: "Game Command",
+                value: "**.profile**: Create Game Profile/View Profile\n**.collect**: Collect item.\n**.daily**: Daily reward\n**.balance**: Check money\n**.shop**: Zebra Supermarket\n**.buy**: Buying food at zebra supermarket\n**.sell**: Sell item\n**.eat**: Eat food or snack\n**.burn**: Burning fuel for a campfire\n**.camp**: Move camp\n**.work**: Work to get money\n**.sleep**: Sleep\n**.wake**: Awake from sleeping\n**.delete**: Remove account"
             }
         )
         .setColor("#FFFF00")

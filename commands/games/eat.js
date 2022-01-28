@@ -3,16 +3,16 @@ import userProfile from "../../schema/profile-scheme.js"
 
 //Snacks
 const deepFriedEgg = new Array("egg","friedsoftboiledegg", "deepfriedegg")
-const cookie = new Array("cookie", "kue")
+const cookie = new Array("cookie")
 const smore = new Array("smore")
-const shimarinDango = new Array("dango","shimarin")
+const shimarinDango = new Array("dango","shimarin","shimarindango")
 const mochi = new Array("mochi", "moci")
 
 //Foods
-const mieKari = new Array("noodle", "curry", "currynoodle", "miekari")
+const mieKari = new Array("noodle", "curry", "currynoodle")
 const beefborscht = new Array("beefborscht","beetborscht", "borscht")
-const supPasta = new Array("sup", "soup", "suppasta", "souppasta")
-const sateDagingBabi = new Array("yakiton","daging", "babi", "sate", "satay")
+const supPasta = new Array("soup", "pasta", "souppasta")
+const sateDagingBabi = new Array("yakiton", "satay", "pig", "meat")
 const hotpot = new Array("hotpot", "gyoza", "gyozanabe")
 const sukiyaki = new Array("sukiyaki")
 
@@ -29,7 +29,7 @@ const command = {
         }
         if(!profileData){
             const embed = new MessageEmbed()
-            .setDescription("Pengguna baru?\nKetik `.profile` untuk mendaftarkan akun kamu")
+            .setDescription("New user?\nType `.profile` to register your account")
             .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
             return
@@ -37,7 +37,7 @@ const command = {
 
         if(profileData.sleep){
             const embed = new MessageEmbed()
-            .setDescription(`Kamu sedang tidur!`)
+            .setDescription(`You are sleeping!`)
             .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
             return
@@ -45,14 +45,13 @@ const command = {
 
         if(!makanan){
             const embed = new MessageEmbed()
-            .setTitle("List Makanan")
-            .setDescription("Pastikan nama makanan yang kamu makan harus sama dengan id di list.")
+            .setTitle("List of Food")
             .addFields(
                 {
                     name:'Snack', value: "Fried Soft-Boiled Egg = ⚡ 10\n`id:egg`\n\nCookie = ⚡ 5\n`id:cookie`\n\nSmore = ⚡ 10\n`id:smore`\n\nShimarin Dango = ⚡ 25\n`id:dango`\n\nMochi = ⚡ 20\n`id:mochi`", inline:true
                 },
                 {
-                    name:'Makanan', value: "Curry Noodle = ⚡ 25\n`id:curry`\n\nBeet and Beef Borscht = ⚡ 40\n`id:borscht`\n\nSoup Style Pasta = ⚡ 50\n`id:soup`\n\nYakiton = ⚡ 30\n`id:yakiton`\n\nGyoza Nabe = ⚡ 75\n`id:hotpot`\n\nSukiyaki = ⚡ 90\n`id:sukiyaki`", inline:true
+                    name:'Food', value: "Curry Noodle = ⚡ 25\n`id:curry`\n\nBeet and Beef Borscht = ⚡ 40\n`id:borscht`\n\nSoup Style Pasta = ⚡ 50\n`id:soup`\n\nYakiton = ⚡ 30\n`id:yakiton`\n\nGyoza Nabe = ⚡ 75\n`id:hotpot`\n\nSukiyaki = ⚡ 90\n`id:sukiyaki`", inline:true
                 }
             )
             .setColor("#FF0000")
@@ -99,7 +98,7 @@ const command = {
         }
         else{
             const embed = new MessageEmbed()
-            .setDescription(`Makanan apa itu?`)
+            .setDescription(`Sorry, the food is not available`)
             .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
         }
@@ -159,7 +158,7 @@ async function itemSell(msg, food, totalFood, profileData){
     }
     const totalStamina = stamina * totalFood
     const embed = new MessageEmbed()
-    .setDescription(`Apakah kamu ingin makan ${totalFood} ${makanan}?\n⚡ +${totalStamina}`)
+    .setDescription(`Do you want to eat ${totalFood} ${makanan}?\n⚡ +${totalStamina}`)
     .setColor("#FF0000")
     let sellMsg = await msg.channel.send({embeds:[embed]})
     sellMsg.react("✅")
@@ -180,7 +179,7 @@ async function itemSell(msg, food, totalFood, profileData){
     collector.on('end', async (collected) => {
         if(collected.size == 0){
             const embed = new MessageEmbed()
-            .setDescription("Waktu reaksi habis!")
+            .setDescription("Time has run out to react.")
             .setColor("#FF0000")
             sellMsg.edit({embeds:[embed]})
             return
@@ -486,7 +485,7 @@ async function itemSell(msg, food, totalFood, profileData){
             }
             else{
                 const embed = new MessageEmbed()
-                .setDescription("Makanan yang kamu punya kurang.")
+                .setDescription("You don't have this food.")
                 .setColor("#FF0000")
                 sellMsg.edit({embeds:[embed]})
                 return
@@ -495,7 +494,7 @@ async function itemSell(msg, food, totalFood, profileData){
         }
         else if(text == "❌"){
             const embed = new MessageEmbed()
-            .setDescription("Kamu tidak jadi makan")
+            .setDescription("Canceled")
             .setColor("#FF0000")
             sellMsg.edit({embeds:[embed]})
         }
@@ -505,7 +504,7 @@ async function itemSell(msg, food, totalFood, profileData){
 async function sendMessage(sellMsg, stamina, makanan, totalFood){
 
     const embed = new MessageEmbed()
-    .setDescription(`Kamu memakan ${totalFood} ${makanan}\n⚡ +${stamina}`)
+    .setDescription(`You eat ${totalFood} ${makanan}\n⚡ +${stamina}`)
     .setColor("#00FF00")
     sellMsg.edit({embeds:[embed]})
 }
