@@ -61,10 +61,10 @@ const command = {
         await userProfile.findOneAndUpdate({userID:id}, object,{ new: true})
         const embed = new MessageEmbed()
         if(yourCamp > 0){
-            embed.setDescription(`You have received:\n💴 +${reward[0]}\n<:yc_pinecone:927725824881336350> x${reward[1]}\n<:yc_stick:933994005048479765> ${reward[2]}x\n:wood: ${reward[3]}x`)
+            embed.setDescription(`You have received:\n💴 +${reward[0]}\n<:yc_pinecone:927725824881336350> ${reward[1]}x\n<:yc_stick:933994005048479765> ${reward[2]}x\n:wood: ${reward[3]}x`)
         }
         else{
-            embed.setDescription(`You have received:\n💴 +${reward[0]}\n<:yc_pinecone:927725824881336350> x${reward[1]}\n<:yc_stick:933994005048479765> ${reward[2]}x`)
+            embed.setDescription(`You have received:\n💴 +${reward[0]}\n<:yc_pinecone:927725824881336350> ${reward[1]}x\n<:yc_stick:933994005048479765> ${reward[2]}x`)
         }
         embed.setColor("#00FF00")
         msg.channel.send({embeds:[embed]})

@@ -11,8 +11,8 @@ https://discord.gg/UznuRAvUpv
 
 | Version | State                          | Warning              |
 | ------- | ------------------------------ | -------------------- |
-| <1.2.1  | Unstable                       | :stop_sign:          |
-| 1.2.1   | Stable                         | :green_circle:       |
+| <1.2.2  | Unstable                       | :stop_sign:          |
+| 1.2.2   | Stable                         | :green_circle:       |
 
 ## Version 1.2.0
 - Added remove account command.
@@ -23,3 +23,7 @@ https://discord.gg/UznuRAvUpv
 ## Version 1.2.1
 - Fix remove command.
 - Fix readme.
+
+## Version 1.2.2
+-Fix profile bug.
+-Fix text.

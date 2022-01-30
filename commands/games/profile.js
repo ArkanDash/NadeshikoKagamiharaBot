@@ -280,7 +280,7 @@ function userProfileEmbed(msg, userData, member, profileData){
             iconURL:profileData.footerLink
         })
     }
-    else if(profileDataData.footerText){
+    else if(profileData.footerText){
         embed.setFooter({
             text:profileData.footerText
         })   
