@@ -7,8 +7,8 @@ const command = {
         let char = await Character()
         let characterPage = 0;
         let charMsg = await msg.channel.send({embeds:[char[0]]})
-        await charMsg.react("<a:yc_rinwaveright:934324569660092446>")
-        await charMsg.react("<a:yc_rinwaveleft:934324501062225950>")
+        await charMsg.react("◀️")
+        await charMsg.react("▶️")
 
         const filter = (reaction, user) => {return user.id == msg.author.id;}
     
@@ -19,12 +19,12 @@ const command = {
     
         collector.on('collect', (reaction, user) => {
             let text = reaction.emoji.name
-            if(text == "yc_rinwaveright" && characterPage > 0){
+            if(text == "◀️" && characterPage > 0){
                 characterPage -= 1;
                 charMsg.edit({embeds:[char[characterPage]]})
                 reaction.users.remove(user.id)
             }
-            else if(text == "yc_rinwaveleft" && characterPage < 4){
+            else if(text == "▶️" && characterPage < 4){
                 characterPage += 1;
                 charMsg.edit({embeds:[char[characterPage]]})
                 reaction.users.remove(user.id)
@@ -49,6 +49,10 @@ export default command;
 async function Character(){
     const embed = new MessageEmbed()
     .setTitle("『 __Rin Shima__ 』")
+    .setAuthor({
+        name:"Yuru Camp",
+        iconURL:"https://implyingrigged.info/w/images/thumb/8/86/Yucamp_logo.png/250px-Yucamp_logo.png"
+    })
     .setURL("https://yuru-camp.fandom.com/wiki/Rin_Shima")
     .setDescription("Rin Shima (志摩 リン, Shima Rin) is a young girl in Yuru Camp△ who is a student at Motosu High School and enjoys camping, but she usually camps by herself until she meets Nadeshiko Kagamihara.")
     .setColor("#3A70AD")
@@ -76,6 +80,10 @@ async function Character(){
     });
     const embed2 = new MessageEmbed()
     .setTitle("『 __Nadeshiko Kagamihara__ 』")
+    .setAuthor({
+        name:"Yuru Camp",
+        iconURL:"https://implyingrigged.info/w/images/thumb/8/86/Yucamp_logo.png/250px-Yucamp_logo.png"
+    })
     .setURL("https://yuru-camp.fandom.com/wiki/Nadeshiko_Kagamihara")
     .setDescription("Nadeshiko Kagamihara (各務原 なでしこ) is a young girl who appears in Yuru Camp△ as recent transfer to Motosu High School from Nanbu-chō (Nanbu town), the daughter of Shūichirō Kagamihara and Shizuka Kagamihara and the younger sister of Sakura Kagamihara. She previously lived in Hamamatsu city on the the southern coast of Shizuoka prefecture.")
     .setColor("#FB9BC9")
@@ -103,6 +111,10 @@ async function Character(){
     });
     const embed3 = new MessageEmbed()
     .setTitle("『 __Aoi Inuyama__ 』")
+    .setAuthor({
+        name:"Yuru Camp",
+        iconURL:"https://implyingrigged.info/w/images/thumb/8/86/Yucamp_logo.png/250px-Yucamp_logo.png"
+    })
     .setURL("https://yuru-camp.fandom.com/wiki/Aoi_Inuyama")
     .setDescription("Aoi Inuyama (犬山 あおい Inuyama Aoi) is a high-school girl in Yuru Camp△ who is a student at Motosu High School. She is a founding member of The Outdoor Activities Club.")
     .setColor("#9CE31B")
@@ -130,6 +142,10 @@ async function Character(){
     });
     const embed4 = new MessageEmbed()
     .setTitle("『 __Chiaki Ōgaki__ 』")
+    .setAuthor({
+        name:"Yuru Camp",
+        iconURL:"https://implyingrigged.info/w/images/thumb/8/86/Yucamp_logo.png/250px-Yucamp_logo.png"
+    })
     .setURL("https://yuru-camp.fandom.com/wiki/Chiaki_%C5%8Cgaki")
     .setDescription("Chiaki Ōgaki (大垣 千明 Ōgaki Chiaki) is a high-school girl in Yuru Camp△ who is a student at Motosu High School. She is a founding member of The Outdoor Activities Club.")
     .setColor("#C13557")
@@ -157,6 +173,10 @@ async function Character(){
     });
     const embed5 = new MessageEmbed()
     .setTitle("『 __Ena Saitō__ 』")
+    .setAuthor({
+        name:"Yuru Camp",
+        iconURL:"https://implyingrigged.info/w/images/thumb/8/86/Yucamp_logo.png/250px-Yucamp_logo.png"
+    })
     .setURL("https://yuru-camp.fandom.com/wiki/Ena_Sait%C5%8D")
     .setDescription(`Ena Saitō (斉藤 恵那, Saitō Ena) is a young girl in Yuru Camp△ who is a student at Motosu High School and first appears in "Welcome to the Outdoor Activities Club!" as a friend of Rin.`)
     .setColor("#F98B01")

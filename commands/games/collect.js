@@ -60,10 +60,10 @@ const command = {
                 await userProfile.findOneAndUpdate({userID:id}, object, {new:true})
                 
                 if(yourCamp > 0){
-                    embed.setDescription(`You have collected:\n<:yc_pinecone:927725824881336350> ${collection[0]}x\n<:yc_stick:933994005048479765> ${collection[1]}x\n:wood: ${collection[2]}x`)
+                    embed.setDescription(`You have collected:\nPinecone ${collection[0]}x\nWood Stick ${collection[1]}x\nWood Log ${collection[2]}x`)
                 }
                 else{
-                    embed.setDescription(`You have collected:\n<:yc_pinecone:927725824881336350> ${collection[0]}x\n<:yc_stick:933994005048479765> ${collection[1]}x`)
+                    embed.setDescription(`You have collected:\nPinecone ${collection[0]}x\nWood Stick ${collection[1]}x`)
                 }
                 embed.setColor("#00FF00")
                 let getShippeitaro = collectionChance()

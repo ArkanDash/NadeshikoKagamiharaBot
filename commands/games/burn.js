@@ -41,7 +41,7 @@ const command = {
                     value: `Pinecone x${profileData.items.pinecone}\nWooden Stick x${profileData.items.stick}\nWood Log x${profileData.items.wood}`
                 }
             )
-            .setDescription("List of Fuels that can be burned: \n\nPinecone = <a:yc_campfire:927127127244017675> +3\n`id:pinecone`\n\nStick = <a:yc_campfire:927127127244017675> +10\n`id:stick`\n\nWood = <a:yc_campfire:927127127244017675> +25\n`id:wood`")
+            .setDescription("List of Fuels that can be burned: \n\nPinecone = 🔥 +3\n`id:pinecone`\n\nStick = 🔥 +10\n`id:stick`\n\nWood = 🔥 +25\n`id:wood`")
             .setColor("#FF0000")
             msg.channel.send({embeds:[embed]})
             return
@@ -90,7 +90,7 @@ async function itemSell(msg, item, totalItem){
     }
     const totalMoney = campFireDuration * totalItem
     const embed = new MessageEmbed()
-    .setDescription(`Do you want to burn **${totalItem} ${namaItem}**?\n<a:yc_campfire:927127127244017675> +${totalMoney}`)
+    .setDescription(`Do you want to burn **${totalItem} ${namaItem}**?\n🔥 +${totalMoney}`)
     .setColor("#FF0000")
     let sellMsg = await msg.channel.send({embeds:[embed]})
     sellMsg.react("✅")
@@ -200,7 +200,7 @@ async function itemSell(msg, item, totalItem){
 async function sendMessage(sellMsg, totalMoney, item, totalItem){
 
     const embed = new MessageEmbed()
-    .setDescription(`You burn ${totalItem} ${item}.\n<a:yc_campfire:927127127244017675> +${totalMoney}`)
+    .setDescription(`You burn ${totalItem} ${item}.\n🔥 +${totalMoney}`)
     .setColor("#00FF00")
     sellMsg.edit({embeds:[embed]})
 }

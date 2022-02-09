@@ -62,10 +62,10 @@ const command = {
                     name: 'Foods', value: `Curry Noodle x${currynoodle}\nBeet and Beef Borscht x${borscht}\nSoup Style Pasta x${souppasta}\nYakiton x${yakiton}\nGyoza Nabe x${gyozanabe}\nSukiyaki x${sukiyaki}`, inline:true
                 },
                 {
-                    name: 'Items', value: `<:yc_pinecone:927725824881336350> Pinecone x${profileData.items.pinecone}\n<:yc_stick:933994005048479765> Wooden Stick x${profileData.items.stick}\n:wood: Wood Log x${profileData.items.wood}`
+                    name: 'Items', value: `Pinecone x${profileData.items.pinecone}\nWooden Stick x${profileData.items.stick}\nWood Log x${profileData.items.wood}`
                 },
                 {
-                    name: 'Campfire', value: `<a:yc_campfire:927127127244017675> ${profileData.campFire}%`, inline: true
+                    name: 'Campfire', value: `🔥 ${profileData.campFire}%`, inline: true
                 },
                 {
                     name: 'Hunger', value: `⚡ ${profileData.hunger}%`, inline: true
@@ -257,10 +257,10 @@ function userProfileEmbed(msg, userData, member, profileData){
             name: 'Foods', value: `Curry Noodle x${currynoodle}\nBeet and Beef Borscht x${borscht}\nSoup Style Pasta x${souppasta}\nYakiton x${yakiton}\nGyoza Nabe x${gyozanabe}\nSukiyaki x${sukiyaki}`, inline:true
         },
         {
-            name: 'Items', value: `<:yc_pinecone:927725824881336350> Pinecone x${profileData.items.pinecone}\n<:yc_stick:933994005048479765> Wooden Stick x${profileData.items.stick}\n:wood: Wood Log x${profileData.items.wood}`
+            name: 'Items', value: `Pinecone x${profileData.items.pinecone}\nWooden Stick x${profileData.items.stick}\nWood Log x${profileData.items.wood}`
         },
         {
-            name: 'Campfire', value: `<a:yc_campfire:927127127244017675> ${profileData.campFire}%`, inline: true
+            name: 'Campfire', value: `🔥 ${profileData.campFire}%`, inline: true
         },
         {
             name: 'Hunger', value: `⚡ ${profileData.hunger}%`, inline: true
