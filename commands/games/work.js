@@ -83,7 +83,7 @@ function workWages(id){
     }
     else if(id == 4){
         wages = rndInt(10000, 15000)
-        job = "Pengirim Paket"
+        job = "Package Sender"
     }
     else if(id == 5){
         wages = rndInt(20000, 30000)

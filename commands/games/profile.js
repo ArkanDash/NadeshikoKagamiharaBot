@@ -84,7 +84,7 @@ const command = {
                     iconURL:profileData.footerLink
                 })
             }
-            else if(profileDataData.footerText){
+            else if(profileData.footerText){
                 embed.setFooter({
                     text:profileData.footerText
                 })   
@@ -346,7 +346,7 @@ function userColletionEmbed(msg, userData, member, profileData){
     if(profileData.collections.shippeitaro){
         embed.setTitle(`${userData.username}#${userData.discriminator} Collection Profile`)
         .setDescription('Shippeitaro-shapped Omikuji')
-        .setImage('https://cdn.discordapp.com/attachments/934324669312532501/936393638919938089/shippeitaro.png')
+        .setImage('https://cdn.discordapp.com/attachments/948152309144240138/948450956683649034/shippeitaro.png')
         .setColor("#FFD700")
     }
     else{

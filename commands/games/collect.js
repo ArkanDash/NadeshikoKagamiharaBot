@@ -76,7 +76,7 @@ const command = {
                     await userProfile.findOneAndUpdate({userID:id}, getCollection, {new: true})
                     let embed2 = new MessageEmbed()
                     .setTitle('YOU JUST GOT SHIPPEITARO-SHAPED OMIKUJI')
-                    .setImage('https://cdn.discordapp.com/attachments/934324669312532501/936393638919938089/shippeitaro.png')
+                    .setImage('https://cdn.discordapp.com/attachments/948152309144240138/948450956683649034/shippeitaro.png')
                     .setColor("#FFD700")
                     msg.channel.send({embeds:[embed, embed2]})
                 }

@@ -11,8 +11,8 @@ https://discord.gg/UznuRAvUpv
 
 | Version | State                          | Warning              |
 | ------- | ------------------------------ | -------------------- |
-| <1.2.3  | Unstable                       | :stop_sign:          |
-| 1.2.3   | Stable                         | :green_circle:       |
+| <1.2.4  | Unstable                       | :stop_sign:          |
+| 1.2.4   | Stable                         | :green_circle:       |
 
 ## Version 1.2.0
 - Added remove account command.
@@ -30,3 +30,7 @@ https://discord.gg/UznuRAvUpv
 
 ## Version 1.2.3
 - Change from custom emojis to unicode emoticons
+
+## Version 1.2.4
+- Language fix
+- Bug fixes
